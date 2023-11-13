@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,12 +11,12 @@ import (
 	"github.com/tomonakar/go_api_training/models"
 )
 
-// hello ハンドラ
+// Get /hello ハンドラ
 func HelloHandler(w http.ResponseWriter, req *http.Request) {
 	io.WriteString(w, "Hello, world!\n")
 }
 
-// article ハンドラ
+// Post /article ハンドラ
 func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 
 	var reqArticle models.Article
@@ -29,7 +29,7 @@ func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(article)
 }
 
-// articleリスト ハンドラ
+// GET /article/list ハンドラ
 func GetArticleListHandler(w http.ResponseWriter, req *http.Request) {
 	// GET /article/list?page=X でpageを指定して記事一覧を取得する
 	queryMap := req.URL.Query()
@@ -50,17 +50,13 @@ func GetArticleListHandler(w http.ResponseWriter, req *http.Request) {
 		page = 1
 	}
 
-	articleList := []models.Article{models.Article1, models.Article2}
-	jsonData, err := json.Marshal(articleList)
-	if err != nil {
-		errMsg := fmt.Sprintf("fail to encode json page %d\n", page)
-		http.Error(w, errMsg, http.StatusInternalServerError)
-	}
+	log.Println(page)
 
-	w.Write(jsonData)
+	articleList := []models.Article{models.Article1, models.Article2}
+	json.NewEncoder(w).Encode(articleList)
 }
 
-// article詳細 ハンドラ
+// GET /article/{id} ハンドラ
 func GetArticleByIdHandler(w http.ResponseWriter, req *http.Request) {
 	// mux.Vars(req)でパスパラメータを MAP形式で取得できる
 	// 今回はidを取得するので、idをキーにして値を取得する
@@ -69,32 +65,33 @@ func GetArticleByIdHandler(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "Invalid article ID", http.StatusBadRequest)
 		return
 	}
-	resString := fmt.Sprintf("Article ID is %d\n", articleID)
+
+	log.Println(articleID)
 
 	article := models.Article1
-	jsonData, err := json.Marshal(article)
-	if err != nil {
-		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
-	}
-	w.Write(jsonData)
-
-	io.WriteString(w, resString)
+	json.NewEncoder(w).Encode(article)
 }
 
-// articleいいね ハンドラ
+// POST /article/nice ハンドラ
 func ArticleNiceHandler(w http.ResponseWriter, req *http.Request) {
-	jsonData, err := json.Marshal(models.Article1)
-	if err != nil {
-		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+	var reqArticle models.Article
+	if err := json.NewDecoder(req.Body).Decode(&reqArticle); err != nil {
+		http.Error(w, "fail to decode json\n", http.StatusBadRequest)
+		return
 	}
-	w.Write(jsonData)
+
+	article := reqArticle
+	json.NewEncoder(w).Encode(article)
 }
 
+// Post /comment ハンドラ
 func PostCommentHandler(w http.ResponseWriter, req *http.Request) {
-	comment := models.Comment1
-	jsonData, err := json.Marshal(comment)
+	var comment models.Comment
+	err := json.NewDecoder(req.Body).Decode(&comment)
 	if err != nil {
-		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+		http.Error(w, "fail to decode json\n", http.StatusBadRequest)
+		return
 	}
-	w.Write(jsonData)
+
+	json.NewEncoder(w).Encode(comment)
 }

@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  mysql:
+    platform: linux/x86_64 # M2チップ用
+    image: mysql:5.7 # バージョン指定
+    container_name: db-for-go
+
+    # MySQLの設定値を指定
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --sql-mode=ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+      # コンテナ内で使用する環境変数の値を環境変数で指定
+    environment:
+      MYSQL_ROOT_USER: ${ROOTUSER}
+      MYSQL_ROOT_PASSWORD: ${ROOTPASS}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${USERNAME}
+      MYSQL_PASSWORD: ${USERPASS}
+      TZ: Asia/Tokyo
+
+    # ホスト側のポートとコンテナ側のポートを紐付け
+    ports:
+      - 3306:3306
+
+    # コンテナ内にある MySQL のデータを永続化するためにボリュームを指定
+    volumes:
+      - db-volume:/var/lib/mysql
+
+# ボリュームの作成
+volumes:
+  db-volume:
