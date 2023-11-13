@@ -21,7 +21,26 @@ func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 
 // articleリスト ハンドラ
 func GetArticleListHandler(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "Article List\n")
+	// GET /article/list?page=X でpageを指定して記事一覧を取得する
+	queryMap := req.URL.Query()
+
+	var page int
+
+	// pageに指定が複数ある場合は最初の値を取得する
+	if p, ok := queryMap["page"]; ok && len(p) > 0 {
+		var err error
+		// 数値変換できない値の場合はエラーを返す
+		page, err = strconv.Atoi(p[0])
+		if err != nil {
+			http.Error(w, "Invalid page parameter", http.StatusBadRequest)
+			return
+		}
+		// パラメータ pageの指定がない場合はpage=1とする
+	} else {
+		page = 1
+	}
+	resString := fmt.Sprintf("Article List (page %d)\n", page)
+	io.WriteString(w, resString)
 }
 
 // article詳細 ハンドラ
