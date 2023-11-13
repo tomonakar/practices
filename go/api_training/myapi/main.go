@@ -13,7 +13,7 @@ func main() {
 	http.HandleFunc("/article", handlers.PostArticleHandler)
 	http.HandleFunc("/article/list", handlers.GetArticleListHandler)
 	http.HandleFunc("/article/", handlers.GetArticleByIdHandler)
-	http.HandleFunc("/article/nice", handlers.GetArticleNiceHandler)
+	http.HandleFunc("/article/nice", handlers.ArticleNiceHandler)
 	http.HandleFunc("/comment", handlers.PostCommentHandler)
 
 	log.Println("server start at port 8080")
