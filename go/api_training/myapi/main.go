@@ -1,16 +1,38 @@
 package main
 
 import (
-	"io"
+	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
-	"net/url"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/tomonakar/go_api_training/handlers"
 )
 
 func main() {
+	dbUser := "docker"
+	dbPassword := "docker"
+	dbDatabase := "sampledb"
+	// db接続のための文字列を作成
+	dbConn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s?parseTime=true", dbUser, dbPassword, dbDatabase)
+
+	// sql.Openの第一引数はドライバ名で、各パッケージによって異なる
+	// 詳細は各パッケージのドキュメントを参照
+	// @see - https://github.com/go-sql-driver/mysql
+	db, err := sql.Open("mysql", dbConn)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer db.Close()
+
+	// db接続確認
+	if err := db.Ping(); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("connect to DB")
+	}
 
 	r := mux.NewRouter()
 
@@ -23,10 +45,4 @@ func main() {
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
-}
-
-type Request struct {
-	Method string
-	URL    *url.URL
-	Body   io.ReadCloser
 }
