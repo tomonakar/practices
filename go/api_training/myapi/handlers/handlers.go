@@ -1,12 +1,14 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/tomonakar/go_api_training/models"
 )
 
 // hello ハンドラ
@@ -16,7 +18,13 @@ func HelloHandler(w http.ResponseWriter, req *http.Request) {
 
 // article ハンドラ
 func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "post article\n")
+	article := models.Article1
+	jsonData, err := json.Marshal(article)
+	if err != nil {
+		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+	}
+
+	w.Write(jsonData)
 }
 
 // articleリスト ハンドラ
@@ -39,8 +47,15 @@ func GetArticleListHandler(w http.ResponseWriter, req *http.Request) {
 	} else {
 		page = 1
 	}
-	resString := fmt.Sprintf("Article List (page %d)\n", page)
-	io.WriteString(w, resString)
+
+	articleList := []models.Article{models.Article1, models.Article2}
+	jsonData, err := json.Marshal(articleList)
+	if err != nil {
+		errMsg := fmt.Sprintf("fail to encode json page %d\n", page)
+		http.Error(w, errMsg, http.StatusInternalServerError)
+	}
+
+	w.Write(jsonData)
 }
 
 // article詳細 ハンドラ
@@ -54,14 +69,30 @@ func GetArticleByIdHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	resString := fmt.Sprintf("Article ID is %d\n", articleID)
 
+	article := models.Article1
+	jsonData, err := json.Marshal(article)
+	if err != nil {
+		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+	}
+	w.Write(jsonData)
+
 	io.WriteString(w, resString)
 }
 
 // articleいいね ハンドラ
 func ArticleNiceHandler(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "Article Nice\n")
+	jsonData, err := json.Marshal(models.Article1)
+	if err != nil {
+		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+	}
+	w.Write(jsonData)
 }
 
 func PostCommentHandler(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "post comment\n")
+	comment := models.Comment1
+	jsonData, err := json.Marshal(comment)
+	if err != nil {
+		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
+	}
+	w.Write(jsonData)
 }
