@@ -1,8 +1,10 @@
 package main
 
 import (
+	"io"
 	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/gorilla/mux"
 	"github.com/tomonakar/go_api_training/handlers"
@@ -21,4 +23,10 @@ func main() {
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
+}
+
+type Request struct {
+	Method string
+	URL    *url.URL
+	Body   io.ReadCloser
 }
