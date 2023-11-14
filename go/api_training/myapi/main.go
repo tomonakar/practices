@@ -28,11 +28,18 @@ func main() {
 	}
 	defer db.Close()
 
+	// クエリ定義
+	// Note: ?はプレースホルダーで、実行時に値を埋め込む。プレースホルダーはドライバーによって異なる
+	// Note: プレースホルダーはSQLインジェクション対策にもなるため、fmt.Printfなどで動的にクエリを組み立てるのではなく、プレースホルダーを使うこと
+	articleID := 1
 	const sqlStr = `
-select * from articles;
+		select *
+		from articles
+		where article_id = ?;
 `
 
-	rows, err := db.Query(sqlStr)
+	// クエリ実行
+	rows, err := db.Query(sqlStr, articleID)
 	if err != nil {
 		fmt.Println(err)
 		return
