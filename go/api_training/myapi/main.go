@@ -30,8 +30,8 @@ func main() {
 
 	// クエリ定義
 	// Note: ?はプレースホルダーで、実行時に値を埋め込む。プレースホルダーはドライバーによって異なる
-	// Note: プレースホルダーはSQLインジェクション対策にもなるため、fmt.Printfなどで動的にクエリを組み立てるのではなく、プレースホルダーを使うこと
-	articleID := 1
+	// Note: プレースホルダーはSQLインジェクション対策にもなるため、fmt.Printfなどで動的にクエリを組み立てるのではなく、プレースホルダーを使うこと35G1
+	articleID := 10000
 	const sqlStr = `
 		select *
 		from articles
@@ -47,14 +47,11 @@ func main() {
 
 	defer rows.Close()
 
-	// Article構造体のスライスを作成
-	articleArray := make([]models.Article, 0)
-
 	// rows.Next()で次の行があるかどうかを確認
 	// 次の行がある場合は、rows.Scan()で各カラムの値を取得
+	var article models.Article
+	var createdTime sql.NullTime
 	for rows.Next() {
-		var article models.Article
-		var createdTime sql.NullTime
 		// rows.Scanは、引数に「データ読み出し結果を格納したい変数のポインタ」を指定することで、取得レコードの中身を読み出すことができる
 		err := rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum, &createdTime)
 
@@ -65,12 +62,9 @@ func main() {
 		if err != nil {
 			// Scanが失敗したらエラーを出力
 			fmt.Println(err)
-		} else {
-			// Scanが成功したらスライスに追加
-			articleArray = append(articleArray, article)
 		}
 	}
-	fmt.Printf("%+v\n", articleArray)
+	fmt.Printf("%+v\n", article)
 
 	r := mux.NewRouter()
 
