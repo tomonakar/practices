@@ -9,6 +9,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/tomonakar/go_api_training/handlers"
+	"github.com/tomonakar/go_api_training/models"
 )
 
 func main() {
@@ -27,12 +28,42 @@ func main() {
 	}
 	defer db.Close()
 
-	// db接続確認
-	if err := db.Ping(); err != nil {
+	const sqlStr = `
+select * from articles;
+`
+
+	rows, err := db.Query(sqlStr)
+	if err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println("connect to DB")
+		return
 	}
+
+	defer rows.Close()
+
+	// Article構造体のスライスを作成
+	articleArray := make([]models.Article, 0)
+
+	// rows.Next()で次の行があるかどうかを確認
+	// 次の行がある場合は、rows.Scan()で各カラムの値を取得
+	for rows.Next() {
+		var article models.Article
+		var createdTime sql.NullTime
+		// rows.Scanは、引数に「データ読み出し結果を格納したい変数のポインタ」を指定することで、取得レコードの中身を読み出すことができる
+		err := rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum, &createdTime)
+
+		if createdTime.Valid {
+			article.CreatedAt = createdTime.Time
+		}
+
+		if err != nil {
+			// Scanが失敗したらエラーを出力
+			fmt.Println(err)
+		} else {
+			// Scanが成功したらスライスに追加
+			articleArray = append(articleArray, article)
+		}
+	}
+	fmt.Printf("%+v\n", articleArray)
 
 	r := mux.NewRouter()
 
