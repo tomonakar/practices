@@ -31,7 +31,7 @@ func main() {
 	// クエリ定義
 	// Note: ?はプレースホルダーで、実行時に値を埋め込む。プレースホルダーはドライバーによって異なる
 	// Note: プレースホルダーはSQLインジェクション対策にもなるため、fmt.Printfなどで動的にクエリを組み立てるのではなく、プレースホルダーを使うこと35G1
-	articleID := 10000
+	articleID := 1
 	const sqlStr = `
 		select *
 		from articles
@@ -39,31 +39,29 @@ func main() {
 `
 
 	// クエリ実行
-	rows, err := db.Query(sqlStr, articleID)
-	if err != nil {
+	// db.QueryRowは、クエリ実行結果を1行だけ取得する
+	row := db.QueryRow(sqlStr, articleID)
+	if err := row.Err(); err != nil {
 		fmt.Println(err)
 		return
 	}
-
-	defer rows.Close()
 
 	// rows.Next()で次の行があるかどうかを確認
 	// 次の行がある場合は、rows.Scan()で各カラムの値を取得
 	var article models.Article
 	var createdTime sql.NullTime
-	for rows.Next() {
-		// rows.Scanは、引数に「データ読み出し結果を格納したい変数のポインタ」を指定することで、取得レコードの中身を読み出すことができる
-		err := rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum, &createdTime)
-
-		if createdTime.Valid {
-			article.CreatedAt = createdTime.Time
-		}
-
-		if err != nil {
-			// Scanが失敗したらエラーを出力
-			fmt.Println(err)
-		}
+	// rows.Scanは、引数に「データ読み出し結果を格納したい変数のポインタ」を指定することで、取得レコードの中身を読み出すことができる
+	err = row.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum, &createdTime)
+	if err != nil {
+		// データ取得件数が0件の場合は、sql.ErrNoRowsが返ってくるので、データ読み出し処理には入らず終了する
+		fmt.Println(err)
+		return
 	}
+
+	if createdTime.Valid {
+		article.CreatedAt = createdTime.Time
+	}
+
 	fmt.Printf("%+v\n", article)
 
 	r := mux.NewRouter()
