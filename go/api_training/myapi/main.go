@@ -28,6 +28,29 @@ func main() {
 	}
 	defer db.Close()
 
+	// データを挿入する処理
+	// 記事データをEXECメソッドでinsertする
+	articleI := models.Article{
+		Title:    "insert test",
+		Contents: "Can I insert data correctly?",
+		UserName: "tomonakar",
+	}
+
+	const sqlStr2 = `
+		insert into articles (title, contents, username, nice, created_at) values
+		(?, ?, ?, 0, now());
+	`
+	result, err := db.Exec(sqlStr2, articleI.Title, articleI.Contents, articleI.UserName)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// result.LastInsertId()で、AUTO_INCREMENTの値を取得できる
+	fmt.Println(result.LastInsertId())
+	// result.RowsAffected()で、クエリ実行時に影響を受けた行数を取得できる
+	fmt.Println(result.RowsAffected())
+
 	// クエリ定義
 	// Note: ?はプレースホルダーで、実行時に値を埋め込む。プレースホルダーはドライバーによって異なる
 	// Note: プレースホルダーはSQLインジェクション対策にもなるため、fmt.Printfなどで動的にクエリを組み立てるのではなく、プレースホルダーを使うこと35G1
