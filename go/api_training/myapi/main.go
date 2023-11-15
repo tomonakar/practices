@@ -28,6 +28,53 @@ func main() {
 	}
 	defer db.Close()
 
+	// トランザクションの開始
+	tx, err := db.Begin()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// 現在のいいね数を取得する
+	article_id := 1
+	const sqlGetNiceNum = `
+		select nice
+		from articles
+		where article_id = ?;
+	`
+
+	row := tx.QueryRow(sqlGetNiceNum, article_id)
+	if err := row.Err(); err != nil {
+		fmt.Println(err)
+		tx.Rollback()
+		return
+	}
+
+	// 変数 nicenumにいいね数を読み込む
+	var nicenum int
+	err = row.Scan(&nicenum)
+	if err != nil {
+		fmt.Println(err)
+		tx.Rollback()
+		return
+	}
+
+	// いいね数を+1する高k新処理を行う
+	const sqlUpdateNiceNum = `
+		update articles
+		set nice = ?
+		where article_id = ?;
+	`
+	_, err = tx.Exec(sqlUpdateNiceNum, nicenum+1, article_id)
+	if err != nil {
+		fmt.Println(err)
+		tx.Rollback()
+		return
+	}
+
+	// コミットして処理内容を確定する
+	tx.Commit()
+
 	// データを挿入する処理
 	// 記事データをEXECメソッドでinsertする
 	articleI := models.Article{
