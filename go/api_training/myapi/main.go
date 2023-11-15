@@ -110,7 +110,7 @@ func main() {
 
 	// クエリ実行
 	// db.QueryRowは、クエリ実行結果を1行だけ取得する
-	row := db.QueryRow(sqlStr, articleID)
+	row = db.QueryRow(sqlStr, articleID)
 	if err := row.Err(); err != nil {
 		fmt.Println(err)
 		return
