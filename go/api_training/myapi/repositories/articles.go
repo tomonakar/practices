@@ -89,30 +89,33 @@ func UpdateNiceNum(db *sql.DB, articleID int) error {
 		return err
 	}
 
-	const sqlStr = `
+	const sqlGetNice = `
 		select nice
 		from articles
 		where article_id = ?;
 	`
-
-	row := tx.QueryRow(sqlStr, articleID)
+	row := tx.QueryRow(sqlGetNice, articleID)
 	if err := row.Err(); err != nil {
 		tx.Rollback()
 		return err
 	}
-	var niceNum int
-	row.Scan(&niceNum)
 
-	const sqlUpdateNice = `update articles set nice = ? where article_id ?`
-	_, err = db.Exec(sqlUpdateNice, niceNum+1, articleID)
+	var nicenum int
+	err = row.Scan(&nicenum)
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
 
-	if err := tx.Rollback(); err != nil {
+	const sqlUpdateNice = `update articles set nice = ? where article_id = ?`
+	_, err = tx.Exec(sqlUpdateNice, nicenum+1, articleID)
+	if err != nil {
+		tx.Rollback()
 		return err
 	}
 
+	if err := tx.Commit(); err != nil {
+		return err
+	}
 	return nil
 }
