@@ -3,12 +3,12 @@ package handlers
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/tomonakar/go_api_training/models"
+	"github.com/tomonakar/go_api_training/services"
 )
 
 // Get /hello ハンドラ
@@ -25,7 +25,11 @@ func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	article := reqArticle
+	article, err := services.PostArticleService(reqArticle)
+	if err != nil {
+		http.Error(w, "fail internal exec\n", http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(article)
 }
 
@@ -50,14 +54,15 @@ func GetArticleListHandler(w http.ResponseWriter, req *http.Request) {
 		page = 1
 	}
 
-	log.Println(page)
-
-	articleList := []models.Article{models.Article1, models.Article2}
+	articleList, err := services.GetArticleListService(page)
+	if err != nil {
+		http.Error(w, "fail internal exec\n", http.StatusInternalServerError)
+	}
 	json.NewEncoder(w).Encode(articleList)
 }
 
 // GET /article/{id} ハンドラ
-func GetArticleByIdHandler(w http.ResponseWriter, req *http.Request) {
+func ArticleDetailHandler(w http.ResponseWriter, req *http.Request) {
 	// mux.Vars(req)でパスパラメータを MAP形式で取得できる
 	// 今回はidを取得するので、idをキーにして値を取得する
 	articleID, err := strconv.Atoi(mux.Vars(req)["id"])
@@ -66,9 +71,11 @@ func GetArticleByIdHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	log.Println(articleID)
-
-	article := models.Article1
+	article, err := services.GetArticleListService(articleID)
+	if err != nil {
+		http.Error(w, "fail internal exec\n", http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(article)
 }
 
@@ -80,7 +87,11 @@ func ArticleNiceHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	article := reqArticle
+	article, err := services.PostNiceService(reqArticle)
+	if err != nil {
+		http.Error(w, "fail internal exec\n", http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(article)
 }
 
@@ -90,6 +101,12 @@ func PostCommentHandler(w http.ResponseWriter, req *http.Request) {
 	err := json.NewDecoder(req.Body).Decode(&comment)
 	if err != nil {
 		http.Error(w, "fail to decode json\n", http.StatusBadRequest)
+		return
+	}
+
+	comment, err = services.PostCommentService(comment)
+	if err != nil {
+		http.Error(w, "fail internal exec\n", http.StatusInternalServerError)
 		return
 	}
 
