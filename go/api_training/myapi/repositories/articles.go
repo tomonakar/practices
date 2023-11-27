@@ -2,24 +2,26 @@ package repositories
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/tomonakar/go_api_training/models"
 )
 
-// 新規投稿をデータベースにinsertする関数
+const (
+	articleNumPerPage = 5
+)
+
+// 新規投稿をDBにinsertする関数
 func InsertArticle(db *sql.DB, article models.Article) (models.Article, error) {
 	const sqlStr = `
-		insert into articles (title, contents, username, nice, created_at) values
-		(?, ?, ?, 0, now())
+	insert into articles (title, contents, username, nice, created_at) values
+	(?, ?, ?, 0, now());
 	`
 
 	var newArticle models.Article
-	newArticle.Title, newArticle.Contents, newArticle.UserName, newArticle.NiceNum = article.Title, article.Contents, article.UserName, article.NiceNum
+	newArticle.Title, newArticle.Contents, newArticle.UserName = article.Title, article.Contents, article.UserName
 
 	result, err := db.Exec(sqlStr, article.Title, article.Contents, article.UserName)
 	if err != nil {
-		fmt.Println(err)
 		return models.Article{}, err
 	}
 
@@ -30,7 +32,7 @@ func InsertArticle(db *sql.DB, article models.Article) (models.Article, error) {
 	return newArticle, nil
 }
 
-// pageで指定されたページに表示する記事一覧を取得する関数
+// 投稿一覧をDBから取得する関数
 func SelectArticleList(db *sql.DB, page int) ([]models.Article, error) {
 	const sqlStr = `
 		select article_id, title, contents, username, nice
@@ -38,10 +40,8 @@ func SelectArticleList(db *sql.DB, page int) ([]models.Article, error) {
 		limit ? offset ?;
 	`
 
-	// pageで指定されたページに表示する記事一覧を取得
-	rows, err := db.Query(sqlStr, 5, (page-1)*5)
+	rows, err := db.Query(sqlStr, articleNumPerPage, ((page - 1) * articleNumPerPage))
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -50,22 +50,22 @@ func SelectArticleList(db *sql.DB, page int) ([]models.Article, error) {
 	for rows.Next() {
 		var article models.Article
 		rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum)
+
 		articleArray = append(articleArray, article)
 	}
+
 	return articleArray, nil
 }
 
-// articleIDで指定された記事の詳細を取得する関数
+// 投稿IDを指定して、記事データを取得する関数
 func SelectArticleDetail(db *sql.DB, articleID int) (models.Article, error) {
 	const sqlStr = `
 		select *
 		from articles
 		where article_id = ?;
 	`
-
 	row := db.QueryRow(sqlStr, articleID)
 	if err := row.Err(); err != nil {
-		fmt.Println(err)
 		return models.Article{}, err
 	}
 
@@ -79,6 +79,7 @@ func SelectArticleDetail(db *sql.DB, articleID int) (models.Article, error) {
 	if createdTime.Valid {
 		article.CreatedAt = createdTime.Time
 	}
+
 	return article, nil
 }
 

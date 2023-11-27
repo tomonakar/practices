@@ -6,15 +6,15 @@ import (
 	"github.com/tomonakar/go_api_training/models"
 )
 
-// 新規コメントをデータベースにinsertする関数
+// 新規投稿をDBにinsertする関数
 func InsertComment(db *sql.DB, comment models.Comment) (models.Comment, error) {
 	const sqlStr = `
 		insert into comments (article_id, message, created_at) values
-		(?, ?, now())
+		(?, ?, now());
 	`
-
 	var newComment models.Comment
 	newComment.ArticleID, newComment.Message = comment.ArticleID, comment.Message
+
 	result, err := db.Exec(sqlStr, comment.ArticleID, comment.Message)
 	if err != nil {
 		return models.Comment{}, err
@@ -33,6 +33,7 @@ func SelectCommentList(db *sql.DB, articleID int) ([]models.Comment, error) {
 		from comments
 		where article_id = ?;
 	`
+
 	rows, err := db.Query(sqlStr, articleID)
 	if err != nil {
 		return nil, err

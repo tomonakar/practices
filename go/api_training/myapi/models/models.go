@@ -14,7 +14,7 @@ type Article struct {
 	Title       string    `json:"title"`
 	Contents    string    `json:"contents"`
 	UserName    string    `json:"user_name"`
-	NiceNum     int       `json:"nice_num"`
-	CommentList []Comment `json:"comment_list"`
+	NiceNum     int       `json:"nice"`
+	CommentList []Comment `json:"comments"`
 	CreatedAt   time.Time `json:"created_at"`
 }

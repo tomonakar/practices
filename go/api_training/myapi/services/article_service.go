@@ -5,7 +5,41 @@ import (
 	"github.com/tomonakar/go_api_training/repositories"
 )
 
-// GetArticleService - 指定IDの記事情報を取得する
+// PostArticleHandlerで使うことを想定したサービス
+// 引数の情報をもとに新しい記事を作り、結果を返却
+func PostArticleService(article models.Article) (models.Article, error) {
+	db, err := connectDB()
+	if err != nil {
+		return models.Article{}, err
+	}
+	defer db.Close()
+
+	newArticle, err := repositories.InsertArticle(db, article)
+	if err != nil {
+		return models.Article{}, err
+	}
+	return newArticle, nil
+}
+
+// ArticleListHandlerで使うことを想定したサービス
+// 指定pageの記事一覧を返却
+func GetArticleListService(page int) ([]models.Article, error) {
+	db, err := connectDB()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	articleList, err := repositories.SelectArticleList(db, page)
+	if err != nil {
+		return nil, err
+	}
+
+	return articleList, nil
+}
+
+// ArticleDetailHandlerで使うことを想定したサービス
+// 指定IDの記事情報を返却
 func GetArticleService(articleID int) (models.Article, error) {
 	db, err := connectDB()
 	if err != nil {
@@ -13,44 +47,40 @@ func GetArticleService(articleID int) (models.Article, error) {
 	}
 	defer db.Close()
 
-	// 1. repositories 層の関数 SelectArticleDetail で記事の詳細を取得する
 	article, err := repositories.SelectArticleDetail(db, articleID)
 	if err != nil {
 		return models.Article{}, err
 	}
-
-	// 2. repositories層の関数 SelectCommentListでコメント一覧を取得する
 	commentList, err := repositories.SelectCommentList(db, articleID)
 	if err != nil {
 		return models.Article{}, err
 	}
 
-	// 3. 2で得たコメント一覧を1で取得したarticle構造他に追加する
 	article.CommentList = append(article.CommentList, commentList...)
 
 	return article, nil
 }
 
-// PostArticleService - 記事を投稿する
-func PostArticleService(article models.Article) (models.Article, error) {
-	// 0. db接続
+// PostNiceHandlerで使うことを想定したサービス
+// 指定IDの記事のいいね数を+1して、結果を返却
+func PostNiceService(article models.Article) (models.Article, error) {
 	db, err := connectDB()
 	if err != nil {
 		return models.Article{}, err
 	}
 	defer db.Close()
 
-	// 1. repositories層の関数 InsertArticle で記事を投稿する
+	err = repositories.UpdateNiceNum(db, article.ID)
+	if err != nil {
+		return models.Article{}, err
+	}
 
-	return models.Article{}, nil
-}
-
-// GetArticleListService - 記事一覧を取得する
-func GetArticleListService(page int) ([]models.Article, error) {
-	return []models.Article{}, nil
-}
-
-// PostNiceService - 記事にいいねをする
-func PostNiceService(article models.Article) (models.Article, error) {
-	return models.Article{}, nil
+	return models.Article{
+		ID:        article.ID,
+		Title:     article.Title,
+		Contents:  article.Contents,
+		UserName:  article.UserName,
+		NiceNum:   article.NiceNum + 1,
+		CreatedAt: article.CreatedAt,
+	}, nil
 }

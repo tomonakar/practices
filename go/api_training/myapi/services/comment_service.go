@@ -1,8 +1,23 @@
 package services
 
-import "github.com/tomonakar/go_api_training/models"
+import (
+	"github.com/tomonakar/go_api_training/models"
+	"github.com/tomonakar/go_api_training/repositories"
+)
 
-// PostCommentService - コメントを投稿する
+// PostCommentHandlerで使用することを想定したサービス
+// 引数の情報をもとに新しいコメントを作り、結果を返却
 func PostCommentService(comment models.Comment) (models.Comment, error) {
-	return models.Comment{}, nil
+	db, err := connectDB()
+	if err != nil {
+		return models.Comment{}, err
+	}
+	defer db.Close()
+
+	newComment, err := repositories.InsertComment(db, comment)
+	if err != nil {
+		return models.Comment{}, err
+	}
+
+	return newComment, nil
 }
