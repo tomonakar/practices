@@ -12,7 +12,7 @@ type MyAppError struct {
 
 // Error - Error()メソッドを実装することで、MyAppError型はerrorインターフェースを満たす
 func (e *MyAppError) Error() string {
-	return e.Message
+	return e.Err.Error()
 }
 
 // Unwrap - Unwrap()メソッドを実装することで、MyAppError型はerrors.Unwrap()を満たす
