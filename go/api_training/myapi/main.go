@@ -32,10 +32,11 @@ func main() {
 	// サーバ全体で使用するサービスを１つ生成
 	ser := services.NewMyAppService(db)
 	// サーバ全体で使用するコントローラーを１つ生成
-	con := controllers.NewMyAppController(ser)
+	aCon := controllers.NewArticleController(ser)
+	cCon := controllers.NewCommentController(ser)
 
 	// コントローラとルーティングを紐付け
-	r := routers.NewRouter(con)
+	r := routers.NewRouter(aCon, cCon)
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
