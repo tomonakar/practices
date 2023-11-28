@@ -9,9 +9,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/tomonakar/go_api_training/controllers"
 	"github.com/tomonakar/go_api_training/routers"
-	"github.com/tomonakar/go_api_training/services"
 )
 
 var (
@@ -29,14 +27,8 @@ func main() {
 		return
 	}
 
-	// サーバ全体で使用するサービスを１つ生成
-	ser := services.NewMyAppService(db)
-	// サーバ全体で使用するコントローラーを１つ生成
-	aCon := controllers.NewArticleController(ser)
-	cCon := controllers.NewCommentController(ser)
-
 	// コントローラとルーティングを紐付け
-	r := routers.NewRouter(aCon, cCon)
+	r := routers.NewRouter(db)
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
