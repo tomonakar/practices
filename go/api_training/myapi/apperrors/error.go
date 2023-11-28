@@ -7,7 +7,7 @@ type MyAppError struct {
 
 	// string型のMessageフィールド
 	Message string // レスポンスに表示するエラーメッセージ
-	Err     error  // エラーチェーンのための内部エラー
+	Err     error  `json:"-"` // エラーチェーンのための内部エラー, jsonには出力しない
 }
 
 // Error - Error()メソッドを実装することで、MyAppError型はerrorインターフェースを満たす
