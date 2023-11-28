@@ -7,17 +7,17 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/tomonakar/go_api_training/controllers/services"
 	"github.com/tomonakar/go_api_training/models"
-	"github.com/tomonakar/go_api_training/services"
 )
 
 // コントローラー構造体
 type MyAppController struct {
-	service *services.MyAppService
+	service services.MyAppServicer
 }
 
 // コンストラクタ
-func NewMyAppController(s *services.MyAppService) *MyAppController {
+func NewMyAppController(s services.MyAppServicer) *MyAppController {
 	return &MyAppController{
 		service: s,
 	}
