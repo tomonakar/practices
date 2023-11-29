@@ -3,7 +3,6 @@ package services
 import (
 	"database/sql"
 	"errors"
-	"sync"
 
 	"github.com/tomonakar/go_api_training/apperrors"
 	"github.com/tomonakar/go_api_training/models"
@@ -45,30 +44,43 @@ func (s *MyAppService) GetArticleService(articleID int) (models.Article, error) 
 	var commentList []models.Comment
 	var articleGetErr, commentGetErr error
 
-	// 並列処理を行うためのMutex
-	var amu sync.Mutex
-	var cmu sync.Mutex
+	type articleResult struct {
+		article models.Article
+		err     error
+	}
+	articleChan := make(chan articleResult)
+	defer close(articleChan)
 
-	// 並列処理を行うためのWaitGroup
-	var wg sync.WaitGroup
-	wg.Add(2)
+	// goroutineを使って、並列処理を行う
+	// チャネルを使って、並列処理の結果を受け取る
+	go func(ch chan<- articleResult, db *sql.DB, articleID int) {
+		article, err := repositories.SelectArticleDetail(db, articleID)
+		ch <- articleResult{article: article, err: err}
+	}(articleChan, s.db, articleID)
 
-	go func(db *sql.DB, articleID int) {
-		defer wg.Done()
-		amu.Lock()
-		article, articleGetErr = repositories.SelectArticleDetail(db, articleID)
-		amu.Unlock()
-	}(s.db, articleID)
+	type commentResult struct {
+		commentList []models.Comment
+		err         error
+	}
+	commentChan := make(chan commentResult)
+	defer close(commentChan)
 
-	go func(db *sql.DB, articleID int) {
-		defer wg.Done()
-		cmu.Lock()
-		commentList, commentGetErr = repositories.SelectCommentList(s.db, articleID)
-		cmu.Unlock()
-	}(s.db, articleID)
+	// goroutineを使って、並列処理を行う
+	// チャネルを使って、並列処理の結果を受け取る
+	go func(ch chan<- commentResult, db *sql.DB, articleID int) {
+		commentList, err := repositories.SelectCommentList(s.db, articleID)
+		ch <- commentResult{commentList: commentList, err: err}
+	}(commentChan, s.db, articleID)
 
-	// 並列処理の終了を待つ
-	wg.Wait()
+	// 並列処理の結果を受け取る
+	for i := 0; i < 2; i++ {
+		select {
+		case ar := <-articleChan:
+			article, articleGetErr = ar.article, ar.err
+		case cr := <-commentChan:
+			commentList, commentGetErr = cr.commentList, cr.err
+		}
+	}
 
 	if articleGetErr != nil {
 		if errors.Is(articleGetErr, sql.ErrNoRows) {
