@@ -26,16 +26,19 @@ class DocumentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var metadataRecord = document.getMetadata();
+    // metadataからtitleとmodifiedを取得
+    // パターンを使ってレコードを分解して取得している
+    // :modified は modified: modifiedの省略形、ローカル変数名を変更する場合は modified: localModified で変更できる
+    var (title, :modified) = document.getMetadata();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(metadataRecord.$1),
+        title: Text(title),
       ),
       body: Column(
         children: [
           Center(
-            child: Text('Last modified ${metadataRecord.modified}'),
+            child: Text('Last modified $modified'),
           ),
         ],
       ),
