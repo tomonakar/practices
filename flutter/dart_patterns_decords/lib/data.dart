@@ -59,25 +59,47 @@ class Document {
   }
 }
 
-class Block {
-  final String type;
-  final String text;
-  Block(this.type, this.text);
+/// sealedは classの継承を制限するためのキーワード
+/// ・ 同じライブラリ内でのみ継承可能
+/// ・ 継承可能なクラスは同じファイル内で定義されている必要がある
+/// クラスの設計をより厳密にし、意図しない継承を防ぐために使用される
+///
+/// sealed クラスは、 サブクラスが既知であることを保証するため、サブクラスを網羅的に処理するさ場合に便利
+sealed class Block {
+  Block();
 
   factory Block.fromJson(Map<String, dynamic> json) {
-    if (json case {'type': var type, 'text': var text}) {
-      return Block(type, text);
-    } else {
-      throw const FormatException('Unexpected JSON format');
-    }
+    return switch (json) {
+      {'type': 'h1', 'text': String text} => HeaderBlock(text),
+      {'type': 'p', 'text': String text} => ParagraphBlock(text),
+      {'type': 'checkbox', 'text': String text, 'checked': bool checked} =>
+        CheckboxBlock(text, checked),
+      _ => throw const FormatException('Unexpected JSON format')
+    };
   }
+}
+
+class HeaderBlock extends Block {
+  final String text;
+  HeaderBlock(this.text);
+}
+
+class ParagraphBlock extends Block {
+  final String text;
+  ParagraphBlock(this.text);
+}
+
+class CheckboxBlock extends Block {
+  final String text;
+  final bool isChecked;
+  CheckboxBlock(this.text, this.isChecked);
 }
 
 const documentJson = '''
 {
   "metadata": {
     "title": "My Document",
-    "modified": "2024-10-22"
+    "modified": "2024-10-18"
   },
   "blocks": [
     {
