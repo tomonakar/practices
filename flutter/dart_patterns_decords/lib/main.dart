@@ -24,12 +24,28 @@ class DocumentScreen extends StatelessWidget {
 
   const DocumentScreen({required this.document, super.key});
 
+  String formatDate(DateTime dateTime) {
+    var today = DateTime.now();
+    var difference = dateTime.difference(today);
+    return switch (difference) {
+      Duration(inDays: 0) => 'Today',
+      Duration(inDays: 1) => 'tomorrow',
+      Duration(inDays: -1) => 'yesterday',
+      Duration(inDays: var days) when days > 7 => '${days ~/ 7} weeks from now',
+      Duration(inDays: var days) when days < -7 =>
+        '${days.abs() ~/ 7} weeks ago',
+      Duration(inDays: var days, isNegative: true) => '${days.abs()} days ago',
+      Duration(inDays: var days) => '$days days from now',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     // metadataからtitleとmodifiedを取得
     // パターンを使ってレコードを分解して取得している
     // :modified は modified: modifiedの省略形、ローカル変数名を変更する場合は modified: localModified で変更できる
     var (title, :modified) = document.getMetadata();
+    var formattedModifiedDate = formatDate(modified);
     var blocks = document.getBlocks();
 
     return Scaffold(
@@ -38,7 +54,7 @@ class DocumentScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text('Last modified $modified'),
+          Text('Last modified $formattedModifiedDate'),
           Expanded(
             child: ListView.builder(
               itemCount: blocks.length,
