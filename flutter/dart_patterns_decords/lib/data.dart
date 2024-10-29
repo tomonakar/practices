@@ -69,6 +69,7 @@ sealed class Block {
   Block();
 
   factory Block.fromJson(Map<String, dynamic> json) {
+    // パターンマッチングを利用したswitch文を使ってJSONを読み取る
     return switch (json) {
       {'type': 'h1', 'text': String text} => HeaderBlock(text),
       {'type': 'p', 'text': String text} => ParagraphBlock(text),

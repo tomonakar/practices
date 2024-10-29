@@ -27,6 +27,8 @@ class DocumentScreen extends StatelessWidget {
   String formatDate(DateTime dateTime) {
     var today = DateTime.now();
     var difference = dateTime.difference(today);
+
+    // パターンマッチングを利用したswitch文
     return switch (difference) {
       Duration(inDays: 0) => 'Today',
       Duration(inDays: 1) => 'tomorrow',
