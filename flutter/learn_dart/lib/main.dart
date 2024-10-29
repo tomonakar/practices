@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learn_dart/dart_basics_01.dart';
 
 void main() {
-  runApp(const MainApp());
+  hexFormat();
 }
 
 class MainApp extends StatelessWidget {
