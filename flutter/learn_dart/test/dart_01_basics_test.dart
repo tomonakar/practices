@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_test/flutter_test.dart';
 
 void stringEscaping() {
   log('I\'am');
@@ -100,7 +101,6 @@ void hexFormat() {
   log((z >> 2).toRadixString(2)); // 1
 }
 
-
 /// Statement vs Expression
 ///
 /// A statement is a piece of code that performs an action.
@@ -110,3 +110,20 @@ void hexFormat() {
 /// An expression is a piece of code that returns a value.
 /// expressions hold a value at runtime.
 /// expression japanese translation: 式
+
+void main() {
+  test('run dart basics', () {
+    stringEscaping();
+    multilineString();
+    log(upperCase('hello'));
+    log(lowerCase('WORLD'));
+    stringInterpolation();
+    stringConcatenation();
+    stringLength();
+    stringContains();
+    stringReplace();
+    typesConversion();
+    log(temperatureConverter(25));
+    hexFormat();
+  });
+}
