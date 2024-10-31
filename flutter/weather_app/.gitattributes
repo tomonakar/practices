@@ -1,0 +1,7 @@
+# https://twitter.com/mkobuolys/status/1489610640335515648
+## 自動生成ファイルをPR時に差分表示しないようにする
+*.chopper.dart -diff
+*.freezed.dart -diff
+*.g.dart -diff
+*.gen.dart -diff
+*.gr.dart -diff
