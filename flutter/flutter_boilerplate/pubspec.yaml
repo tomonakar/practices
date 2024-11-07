@@ -26,7 +26,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.26
   sqlite3: ^2.4.7
   path_provider: ^2.1.5
-  path: ^1.9.1
+  path: ^1.9.0
 
   # Local Storage
   shared_preferences: ^2.3.2
