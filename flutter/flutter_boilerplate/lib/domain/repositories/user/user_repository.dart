@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../entities/common/result.dart';
 import '../../entities/user/user.dart';
 
@@ -6,7 +7,7 @@ part 'user_repository.g.dart';
 
 abstract class UserRepository {
   /// ユーザー情報の取得
-  Future<Result<User>> getUser(String id);
+  Future<Result<User>> getUser(String id, bool forceRefresh);
 
   /// ユーザープロフィールの取得
   Future<Result<UserProfile>> getUserProfile(String id);
@@ -25,6 +26,6 @@ abstract class UserRepository {
 }
 
 @riverpod
-UserRepository userRepository(UserRepositoryRef ref) {
+UserRepository userRepository(Ref ref) {
   throw UnimplementedError('Provider was not initialized');
 }

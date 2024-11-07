@@ -224,6 +224,8 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
       __$$FailureImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({AppError error});
+
+  $AppErrorCopyWith<$Res> get error;
 }
 
 /// @nodoc
@@ -239,14 +241,24 @@ class __$$FailureImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$FailureImpl<T>(
-      freezed == error
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as AppError,
     ));
+  }
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AppErrorCopyWith<$Res> get error {
+    return $AppErrorCopyWith<$Res>(_value.error, (value) {
+      return _then(_value.copyWith(error: value));
+    });
   }
 }
 
@@ -268,12 +280,11 @@ class _$FailureImpl<T> implements Failure<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FailureImpl<T> &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of Result
   /// with the given fields replaced by the non-null parameter values.
