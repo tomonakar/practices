@@ -1,6 +1,6 @@
 // lib/usecases/providers/usecase_providers.dart
+import 'package:flutter_boilerplate/usecases/auth/get_current_user_usecase.dart';
 import 'package:flutter_boilerplate/usecases/auth/sign_in_usecase.dart';
-import 'package:flutter_boilerplate/usecases/get_current_user_usecase.dart';
 import 'package:flutter_boilerplate/usecases/user/get_user/get_user_usecase.dart';
 import 'package:flutter_boilerplate/usecases/user/update_user/update_user_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
