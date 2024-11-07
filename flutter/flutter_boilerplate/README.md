@@ -1,16 +1,67 @@
-# flutter_boilerplate
+# My First Flutter Boilerplate
 
-A new Flutter project.
+This is a Flutter application boilerplate that adopts Layered Architecture and Riverpod.
+
+## Features
+- 📱 Layered Architecture
+- 🛠 Riverpod for State Management
+- 🎨 Multiple Flavors (Development, Staging, Production)
+- 📊 Analytics Integration (Firebase & Mixpanel)
+- 🐛 Error Tracking with Sentry
+- 💰 Monetization with App in Purchase and AdMob
+- 🔄 Force Update
+- ⭐️ App Review
+- 📝 User Feedback Form for Feature Requests and Bug Reports
+- 🧪 Test Ready Structure
+
+
+## Project Structure
+
+```
+lib/
+├── app/
+│   ├── analytics/         # Analytics
+│   ├── sentry/            # Error Tracking
+│   └── config/            # App Configuration
+├── core/                  # Common Functionalities
+├── data/                  # Data Layer
+├── domain/                # Domain Layer
+├── usecases/              # Usecase Layer
+└── presentation/          # Presentation Layer
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Set up the project
+```bash
+make set
+```
 
-A few resources to get you started if this is your first Flutter project:
+2. Run code generation
+```bash
+make codegen
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. Run the app for each environment
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+# Development
+make run-dev
+
+# Staging
+make run-stg
+
+# Production
+make run-prod
+```
+
+### Configuration
+
+The configuration for each environment is managed in `lib/app/config/flavor/flavor_values.dart`.
+
+
+### Testing
+
+```bash
+make test
+```
