@@ -15,6 +15,10 @@ _$ApiResponseImpl<T> _$$ApiResponseImplFromJson<T>(
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
       errorCode: json['error_code'] as String?,
       errorMessage: json['error_message'] as String?,
+      headers: (json['headers'] as Map<String, dynamic>).map(
+        (k, e) =>
+            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
+      ),
     );
 
 Map<String, dynamic> _$$ApiResponseImplToJson<T>(
@@ -26,6 +30,7 @@ Map<String, dynamic> _$$ApiResponseImplToJson<T>(
       'data': _$nullableGenericToJson(instance.data, toJsonT),
       'error_code': instance.errorCode,
       'error_message': instance.errorMessage,
+      'headers': instance.headers,
     };
 
 T? _$nullableGenericFromJson<T>(

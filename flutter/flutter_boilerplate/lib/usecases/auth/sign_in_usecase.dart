@@ -1,7 +1,7 @@
 // lib/usecases/auth/sign_in_usecase.dart
 import 'package:flutter_boilerplate/domain/repositories/auth/auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/entities/common/result.dart';
+import '../../domain/common/result.dart';
 import '../../domain/entities/user/user.dart';
 import '../base/usecase.dart';
 

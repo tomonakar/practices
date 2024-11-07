@@ -11,6 +11,7 @@ class AuthTokenDTO with _$AuthTokenDTO {
     @JsonKey(name: 'access_token') required String accessToken,
     @JsonKey(name: 'refresh_token') required String refreshToken,
     @JsonKey(name: 'expires_at') required DateTime expiresAt,
+    @JsonKey(name: 'server_time') required DateTime serverTime, // サーバー時間を追加
   }) = _AuthTokenDTO;
 
   const AuthTokenDTO._();
@@ -23,14 +24,18 @@ class AuthTokenDTO with _$AuthTokenDTO {
       accessToken: token.accessToken,
       refreshToken: token.refreshToken,
       expiresAt: token.expiresAt,
+      serverTime: token.serverTime,
     );
   }
+
+  get isExpired => serverTime.isAfter(expiresAt);
 
   AuthToken toDomain() {
     return AuthToken(
       accessToken: accessToken,
       refreshToken: refreshToken,
       expiresAt: expiresAt,
+      serverTime: serverTime,
     );
   }
 }

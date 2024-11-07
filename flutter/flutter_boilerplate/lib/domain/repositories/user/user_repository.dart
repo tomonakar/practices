@@ -1,16 +1,22 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../entities/common/result.dart';
+import '../../common/result.dart';
 import '../../entities/user/user.dart';
 
 part 'user_repository.g.dart';
 
 abstract class UserRepository {
   /// ユーザー情報の取得
-  Future<Result<User>> getUser(String id, bool forceRefresh);
+  Future<Result<User>> getUser(
+    String id, {
+    bool forceRefresh = false,
+  });
 
   /// ユーザープロフィールの取得
-  Future<Result<UserProfile>> getUserProfile(String id);
+  Future<Result<UserProfile>> getUserProfile(
+    String id, {
+    bool forceRefresh = false,
+  });
 
   /// ユーザー情報の更新
   Future<Result<User>> updateUser(User user);

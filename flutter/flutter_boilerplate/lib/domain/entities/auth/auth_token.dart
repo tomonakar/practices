@@ -9,16 +9,24 @@ class AuthToken with _$AuthToken {
     required String accessToken,
     required String refreshToken,
     required DateTime expiresAt,
+    required DateTime serverTime, // サーバー時間を追加
   }) = _AuthToken;
 
   const AuthToken._();
 
-  bool get isExpired => DateTime.now().isAfter(expiresAt);
+  bool get isExpired {
+    final now = DateTime.now();
+    final timeDifference = now.difference(serverTime);
+    final adjustedExpiryTime = expiresAt.add(timeDifference);
+    return now.isAfter(adjustedExpiryTime);
+  }
 
   bool get needsRefresh {
-    final thirtyMinutesFromNow =
-        DateTime.now().add(const Duration(minutes: 30));
-    return DateTime.now()
-        .isAfter(expiresAt.subtract(const Duration(minutes: 30)));
+    final now = DateTime.now();
+    final timeDifference = now.difference(serverTime);
+    final adjustedExpiryTime = expiresAt.add(timeDifference);
+    final thirtyMinutesBefore =
+        adjustedExpiryTime.subtract(const Duration(minutes: 30));
+    return now.isAfter(thirtyMinutesBefore);
   }
 }

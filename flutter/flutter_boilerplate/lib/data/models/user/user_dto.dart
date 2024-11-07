@@ -8,8 +8,8 @@ part 'user_dto.g.dart';
 class UserDTO with _$UserDTO {
   const factory UserDTO({
     required String id,
-    @JsonKey(name: 'user_name') required String name,
-    @JsonKey(name: 'email_address') required String email,
+    required String name,
+    required String email,
     @JsonKey(name: 'profile_image_url') String? profileImageUrl,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
@@ -39,6 +39,48 @@ class UserDTO with _$UserDTO {
       profileImageUrl: profileImageUrl,
       createdAt: createdAt,
       updatedAt: updatedAt,
+    );
+  }
+}
+
+@freezed
+class UserProfileDTO with _$UserProfileDTO {
+  const factory UserProfileDTO({
+    required String id,
+    required String name,
+    String? bio,
+    String? location,
+    String? website,
+    @JsonKey(name: 'birth_date') required DateTime birthday,
+    required Map<String, dynamic> preferences,
+  }) = _UserProfileDTO;
+
+  const UserProfileDTO._();
+
+  factory UserProfileDTO.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileDTOFromJson(json);
+
+  factory UserProfileDTO.fromDomain(UserProfile profile) {
+    return UserProfileDTO(
+      id: profile.id,
+      name: profile.name,
+      bio: profile.bio,
+      location: profile.location,
+      website: profile.website,
+      birthday: profile.birthday,
+      preferences: profile.preferences,
+    );
+  }
+
+  UserProfile toDomain() {
+    return UserProfile(
+      id: id,
+      name: name,
+      bio: bio,
+      location: location,
+      website: website,
+      birthday: birthday,
+      preferences: preferences,
     );
   }
 }

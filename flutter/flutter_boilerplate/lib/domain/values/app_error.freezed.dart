@@ -21,24 +21,30 @@ mixin _$AppError {
   TResult when<TResult extends Object?>({
     required TResult Function(String? message) network,
     required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
     required TResult Function(String? message) unknown,
     required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? network,
     TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
     TResult? Function(String? message)? unknown,
     TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? network,
     TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
     TResult Function(String? message)? unknown,
     TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,24 +52,30 @@ mixin _$AppError {
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkError value) network,
     required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(UnknownError value) unknown,
     required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkError value)? network,
     TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(UnknownError value)? unknown,
     TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkError value)? network,
     TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
     TResult Function(UnknownError value)? unknown,
     TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,8 +193,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult when<TResult extends Object?>({
     required TResult Function(String? message) network,
     required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
     required TResult Function(String? message) unknown,
     required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
   }) {
     return network(message);
   }
@@ -192,8 +206,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? network,
     TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
     TResult? Function(String? message)? unknown,
     TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
   }) {
     return network?.call(message);
   }
@@ -203,8 +219,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? network,
     TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
     TResult Function(String? message)? unknown,
     TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
     required TResult orElse(),
   }) {
     if (network != null) {
@@ -218,8 +236,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkError value) network,
     required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(UnknownError value) unknown,
     required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
   }) {
     return network(this);
   }
@@ -229,8 +249,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkError value)? network,
     TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(UnknownError value)? unknown,
     TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
   }) {
     return network?.call(this);
   }
@@ -240,8 +262,10 @@ class _$NetworkErrorImpl extends NetworkError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkError value)? network,
     TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
     TResult Function(UnknownError value)? unknown,
     TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
     required TResult orElse(),
   }) {
     if (network != null) {
@@ -347,8 +371,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult when<TResult extends Object?>({
     required TResult Function(String? message) network,
     required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
     required TResult Function(String? message) unknown,
     required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
   }) {
     return api(statusCode, message);
   }
@@ -358,8 +384,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? network,
     TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
     TResult? Function(String? message)? unknown,
     TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
   }) {
     return api?.call(statusCode, message);
   }
@@ -369,8 +397,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? network,
     TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
     TResult Function(String? message)? unknown,
     TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
     required TResult orElse(),
   }) {
     if (api != null) {
@@ -384,8 +414,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkError value) network,
     required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(UnknownError value) unknown,
     required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
   }) {
     return api(this);
   }
@@ -395,8 +427,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkError value)? network,
     TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(UnknownError value)? unknown,
     TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
   }) {
     return api?.call(this);
   }
@@ -406,8 +440,10 @@ class _$ApiErrorImpl extends ApiError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkError value)? network,
     TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
     TResult Function(UnknownError value)? unknown,
     TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
     required TResult orElse(),
   }) {
     if (api != null) {
@@ -431,6 +467,177 @@ abstract class ApiError extends AppError {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ApiErrorImplCopyWith<_$ApiErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnauthorizedErrorImplCopyWith<$Res>
+    implements $AppErrorCopyWith<$Res> {
+  factory _$$UnauthorizedErrorImplCopyWith(_$UnauthorizedErrorImpl value,
+          $Res Function(_$UnauthorizedErrorImpl) then) =
+      __$$UnauthorizedErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$$UnauthorizedErrorImplCopyWithImpl<$Res>
+    extends _$AppErrorCopyWithImpl<$Res, _$UnauthorizedErrorImpl>
+    implements _$$UnauthorizedErrorImplCopyWith<$Res> {
+  __$$UnauthorizedErrorImplCopyWithImpl(_$UnauthorizedErrorImpl _value,
+      $Res Function(_$UnauthorizedErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$UnauthorizedErrorImpl(
+      freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UnauthorizedErrorImpl extends UnauthorizedError {
+  const _$UnauthorizedErrorImpl([this.message]) : super._();
+
+  @override
+  final String? message;
+
+  @override
+  String toString() {
+    return 'AppError.unauthorized(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthorizedErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnauthorizedErrorImplCopyWith<_$UnauthorizedErrorImpl> get copyWith =>
+      __$$UnauthorizedErrorImplCopyWithImpl<_$UnauthorizedErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) network,
+    required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
+    required TResult Function(String? message) unknown,
+    required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
+  }) {
+    return unauthorized(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? network,
+    TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
+    TResult? Function(String? message)? unknown,
+    TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
+  }) {
+    return unauthorized?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? network,
+    TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
+    TResult Function(String? message)? unknown,
+    TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkError value) network,
+    required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
+    required TResult Function(UnknownError value) unknown,
+    required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
+  }) {
+    return unauthorized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkError value)? network,
+    TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
+    TResult? Function(UnknownError value)? unknown,
+    TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
+  }) {
+    return unauthorized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkError value)? network,
+    TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
+    TResult Function(UnknownError value)? unknown,
+    TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UnauthorizedError extends AppError {
+  const factory UnauthorizedError([final String? message]) =
+      _$UnauthorizedErrorImpl;
+  const UnauthorizedError._() : super._();
+
+  @override
+  String? get message;
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnauthorizedErrorImplCopyWith<_$UnauthorizedErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -506,8 +713,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult when<TResult extends Object?>({
     required TResult Function(String? message) network,
     required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
     required TResult Function(String? message) unknown,
     required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
   }) {
     return unknown(message);
   }
@@ -517,8 +726,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? network,
     TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
     TResult? Function(String? message)? unknown,
     TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
   }) {
     return unknown?.call(message);
   }
@@ -528,8 +739,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? network,
     TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
     TResult Function(String? message)? unknown,
     TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
     required TResult orElse(),
   }) {
     if (unknown != null) {
@@ -543,8 +756,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkError value) network,
     required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(UnknownError value) unknown,
     required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
   }) {
     return unknown(this);
   }
@@ -554,8 +769,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkError value)? network,
     TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(UnknownError value)? unknown,
     TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
   }) {
     return unknown?.call(this);
   }
@@ -565,8 +782,10 @@ class _$UnknownErrorImpl extends UnknownError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkError value)? network,
     TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
     TResult Function(UnknownError value)? unknown,
     TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
     required TResult orElse(),
   }) {
     if (unknown != null) {
@@ -664,8 +883,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult when<TResult extends Object?>({
     required TResult Function(String? message) network,
     required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
     required TResult Function(String? message) unknown,
     required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
   }) {
     return invalidData(message);
   }
@@ -675,8 +896,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? network,
     TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
     TResult? Function(String? message)? unknown,
     TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
   }) {
     return invalidData?.call(message);
   }
@@ -686,8 +909,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? network,
     TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
     TResult Function(String? message)? unknown,
     TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
     required TResult orElse(),
   }) {
     if (invalidData != null) {
@@ -701,8 +926,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkError value) network,
     required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(UnknownError value) unknown,
     required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
   }) {
     return invalidData(this);
   }
@@ -712,8 +939,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkError value)? network,
     TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(UnknownError value)? unknown,
     TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
   }) {
     return invalidData?.call(this);
   }
@@ -723,8 +952,10 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkError value)? network,
     TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
     TResult Function(UnknownError value)? unknown,
     TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
     required TResult orElse(),
   }) {
     if (invalidData != null) {
@@ -747,5 +978,174 @@ abstract class InvalidDataError extends AppError {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InvalidDataErrorImplCopyWith<_$InvalidDataErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CacheErrorImplCopyWith<$Res>
+    implements $AppErrorCopyWith<$Res> {
+  factory _$$CacheErrorImplCopyWith(
+          _$CacheErrorImpl value, $Res Function(_$CacheErrorImpl) then) =
+      __$$CacheErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$$CacheErrorImplCopyWithImpl<$Res>
+    extends _$AppErrorCopyWithImpl<$Res, _$CacheErrorImpl>
+    implements _$$CacheErrorImplCopyWith<$Res> {
+  __$$CacheErrorImplCopyWithImpl(
+      _$CacheErrorImpl _value, $Res Function(_$CacheErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$CacheErrorImpl(
+      freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CacheErrorImpl extends CacheError {
+  const _$CacheErrorImpl([this.message]) : super._();
+
+  @override
+  final String? message;
+
+  @override
+  String toString() {
+    return 'AppError.cache(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CacheErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CacheErrorImplCopyWith<_$CacheErrorImpl> get copyWith =>
+      __$$CacheErrorImplCopyWithImpl<_$CacheErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) network,
+    required TResult Function(int? statusCode, String? message) api,
+    required TResult Function(String? message) unauthorized,
+    required TResult Function(String? message) unknown,
+    required TResult Function(String? message) invalidData,
+    required TResult Function(String? message) cache,
+  }) {
+    return cache(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? network,
+    TResult? Function(int? statusCode, String? message)? api,
+    TResult? Function(String? message)? unauthorized,
+    TResult? Function(String? message)? unknown,
+    TResult? Function(String? message)? invalidData,
+    TResult? Function(String? message)? cache,
+  }) {
+    return cache?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? network,
+    TResult Function(int? statusCode, String? message)? api,
+    TResult Function(String? message)? unauthorized,
+    TResult Function(String? message)? unknown,
+    TResult Function(String? message)? invalidData,
+    TResult Function(String? message)? cache,
+    required TResult orElse(),
+  }) {
+    if (cache != null) {
+      return cache(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkError value) network,
+    required TResult Function(ApiError value) api,
+    required TResult Function(UnauthorizedError value) unauthorized,
+    required TResult Function(UnknownError value) unknown,
+    required TResult Function(InvalidDataError value) invalidData,
+    required TResult Function(CacheError value) cache,
+  }) {
+    return cache(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkError value)? network,
+    TResult? Function(ApiError value)? api,
+    TResult? Function(UnauthorizedError value)? unauthorized,
+    TResult? Function(UnknownError value)? unknown,
+    TResult? Function(InvalidDataError value)? invalidData,
+    TResult? Function(CacheError value)? cache,
+  }) {
+    return cache?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkError value)? network,
+    TResult Function(ApiError value)? api,
+    TResult Function(UnauthorizedError value)? unauthorized,
+    TResult Function(UnknownError value)? unknown,
+    TResult Function(InvalidDataError value)? invalidData,
+    TResult Function(CacheError value)? cache,
+    required TResult orElse(),
+  }) {
+    if (cache != null) {
+      return cache(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CacheError extends AppError {
+  const factory CacheError([final String? message]) = _$CacheErrorImpl;
+  const CacheError._() : super._();
+
+  @override
+  String? get message;
+
+  /// Create a copy of AppError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CacheErrorImplCopyWith<_$CacheErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

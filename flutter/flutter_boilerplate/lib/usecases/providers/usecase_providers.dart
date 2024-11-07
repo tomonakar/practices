@@ -1,9 +1,12 @@
 // lib/usecases/providers/usecase_providers.dart
+import 'package:flutter_boilerplate/usecases/auth/sign_in_usecase.dart';
+import 'package:flutter_boilerplate/usecases/get_current_user_usecase.dart';
+import 'package:flutter_boilerplate/usecases/user/get_user/get_user_usecase.dart';
+import 'package:flutter_boilerplate/usecases/user/update_user/update_user_usecase.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_boilerplate/domain/repositories/auth/auth_repository.dart';
 import 'package:flutter_boilerplate/domain/repositories/user/user_repository.dart';
-import '../repositories/auth/auth_repository_impl.dart';
-import '../repositories/user/user_repository_impl.dart';
 part 'usecase_providers.g.dart';
 
 @Riverpod(keepAlive: true)

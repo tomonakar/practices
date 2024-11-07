@@ -1,5 +1,5 @@
 import 'package:flutter_boilerplate/domain/entities/auth/auth_token.dart';
-import 'package:flutter_boilerplate/domain/entities/common/result.dart';
+import 'package:flutter_boilerplate/domain/common/result.dart';
 import 'package:flutter_boilerplate/domain/entities/user/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

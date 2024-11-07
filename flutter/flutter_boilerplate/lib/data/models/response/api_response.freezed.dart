@@ -27,6 +27,7 @@ mixin _$ApiResponse<T> {
   String? get errorCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'error_message')
   String? get errorMessage => throw _privateConstructorUsedError;
+  Map<String, List<String>> get headers => throw _privateConstructorUsedError;
 
   /// Serializes this ApiResponse to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
@@ -49,7 +50,8 @@ abstract class $ApiResponseCopyWith<T, $Res> {
       {bool success,
       T? data,
       @JsonKey(name: 'error_code') String? errorCode,
-      @JsonKey(name: 'error_message') String? errorMessage});
+      @JsonKey(name: 'error_message') String? errorMessage,
+      Map<String, List<String>> headers});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
     Object? data = freezed,
     Object? errorCode = freezed,
     Object? errorMessage = freezed,
+    Object? headers = null,
   }) {
     return _then(_value.copyWith(
       success: null == success
@@ -89,6 +92,10 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      headers: null == headers
+          ? _value.headers
+          : headers // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>,
     ) as $Val);
   }
 }
@@ -105,7 +112,8 @@ abstract class _$$ApiResponseImplCopyWith<T, $Res>
       {bool success,
       T? data,
       @JsonKey(name: 'error_code') String? errorCode,
-      @JsonKey(name: 'error_message') String? errorMessage});
+      @JsonKey(name: 'error_message') String? errorMessage,
+      Map<String, List<String>> headers});
 }
 
 /// @nodoc
@@ -125,6 +133,7 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
     Object? data = freezed,
     Object? errorCode = freezed,
     Object? errorMessage = freezed,
+    Object? headers = null,
   }) {
     return _then(_$ApiResponseImpl<T>(
       success: null == success
@@ -143,18 +152,25 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      headers: null == headers
+          ? _value._headers
+          : headers // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$ApiResponseImpl<T> implements _ApiResponse<T> {
+class _$ApiResponseImpl<T> extends _ApiResponse<T> {
   const _$ApiResponseImpl(
       {required this.success,
       this.data,
       @JsonKey(name: 'error_code') this.errorCode,
-      @JsonKey(name: 'error_message') this.errorMessage});
+      @JsonKey(name: 'error_message') this.errorMessage,
+      required final Map<String, List<String>> headers})
+      : _headers = headers,
+        super._();
 
   factory _$ApiResponseImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
@@ -170,10 +186,17 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
   @override
   @JsonKey(name: 'error_message')
   final String? errorMessage;
+  final Map<String, List<String>> _headers;
+  @override
+  Map<String, List<String>> get headers {
+    if (_headers is EqualUnmodifiableMapView) return _headers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_headers);
+  }
 
   @override
   String toString() {
-    return 'ApiResponse<$T>(success: $success, data: $data, errorCode: $errorCode, errorMessage: $errorMessage)';
+    return 'ApiResponse<$T>(success: $success, data: $data, errorCode: $errorCode, errorMessage: $errorMessage, headers: $headers)';
   }
 
   @override
@@ -186,13 +209,19 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
             (identical(other.errorCode, errorCode) ||
                 other.errorCode == errorCode) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            const DeepCollectionEquality().equals(other._headers, _headers));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, success,
-      const DeepCollectionEquality().hash(data), errorCode, errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      success,
+      const DeepCollectionEquality().hash(data),
+      errorCode,
+      errorMessage,
+      const DeepCollectionEquality().hash(_headers));
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -209,13 +238,14 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
   }
 }
 
-abstract class _ApiResponse<T> implements ApiResponse<T> {
+abstract class _ApiResponse<T> extends ApiResponse<T> {
   const factory _ApiResponse(
-          {required final bool success,
-          final T? data,
-          @JsonKey(name: 'error_code') final String? errorCode,
-          @JsonKey(name: 'error_message') final String? errorMessage}) =
-      _$ApiResponseImpl<T>;
+      {required final bool success,
+      final T? data,
+      @JsonKey(name: 'error_code') final String? errorCode,
+      @JsonKey(name: 'error_message') final String? errorMessage,
+      required final Map<String, List<String>> headers}) = _$ApiResponseImpl<T>;
+  const _ApiResponse._() : super._();
 
   factory _ApiResponse.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
@@ -231,6 +261,8 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   @override
   @JsonKey(name: 'error_message')
   String? get errorMessage;
+  @override
+  Map<String, List<String>> get headers;
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.

@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/domain/entities/common/result.dart';
+import 'package:flutter_boilerplate/domain/common/result.dart';
 import 'package:flutter_boilerplate/domain/entities/user/user.dart';
 import 'package:flutter_boilerplate/domain/repositories/auth/auth_repository.dart';
 import 'package:flutter_boilerplate/usecases/base/usecase.dart';

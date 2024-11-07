@@ -26,6 +26,8 @@ mixin _$AuthTokenDTO {
   String get refreshToken => throw _privateConstructorUsedError;
   @JsonKey(name: 'expires_at')
   DateTime get expiresAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'server_time')
+  DateTime get serverTime => throw _privateConstructorUsedError;
 
   /// Serializes this AuthTokenDTO to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +48,8 @@ abstract class $AuthTokenDTOCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_at') DateTime expiresAt});
+      @JsonKey(name: 'expires_at') DateTime expiresAt,
+      @JsonKey(name: 'server_time') DateTime serverTime});
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$AuthTokenDTOCopyWithImpl<$Res, $Val extends AuthTokenDTO>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? expiresAt = null,
+    Object? serverTime = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
@@ -80,6 +84,10 @@ class _$AuthTokenDTOCopyWithImpl<$Res, $Val extends AuthTokenDTO>
       expiresAt: null == expiresAt
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      serverTime: null == serverTime
+          ? _value.serverTime
+          : serverTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
@@ -96,7 +104,8 @@ abstract class _$$AuthTokenDTOImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_at') DateTime expiresAt});
+      @JsonKey(name: 'expires_at') DateTime expiresAt,
+      @JsonKey(name: 'server_time') DateTime serverTime});
 }
 
 /// @nodoc
@@ -115,6 +124,7 @@ class __$$AuthTokenDTOImplCopyWithImpl<$Res>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? expiresAt = null,
+    Object? serverTime = null,
   }) {
     return _then(_$AuthTokenDTOImpl(
       accessToken: null == accessToken
@@ -129,6 +139,10 @@ class __$$AuthTokenDTOImplCopyWithImpl<$Res>
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      serverTime: null == serverTime
+          ? _value.serverTime
+          : serverTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -139,7 +153,8 @@ class _$AuthTokenDTOImpl extends _AuthTokenDTO {
   const _$AuthTokenDTOImpl(
       {@JsonKey(name: 'access_token') required this.accessToken,
       @JsonKey(name: 'refresh_token') required this.refreshToken,
-      @JsonKey(name: 'expires_at') required this.expiresAt})
+      @JsonKey(name: 'expires_at') required this.expiresAt,
+      @JsonKey(name: 'server_time') required this.serverTime})
       : super._();
 
   factory _$AuthTokenDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -154,10 +169,13 @@ class _$AuthTokenDTOImpl extends _AuthTokenDTO {
   @override
   @JsonKey(name: 'expires_at')
   final DateTime expiresAt;
+  @override
+  @JsonKey(name: 'server_time')
+  final DateTime serverTime;
 
   @override
   String toString() {
-    return 'AuthTokenDTO(accessToken: $accessToken, refreshToken: $refreshToken, expiresAt: $expiresAt)';
+    return 'AuthTokenDTO(accessToken: $accessToken, refreshToken: $refreshToken, expiresAt: $expiresAt, serverTime: $serverTime)';
   }
 
   @override
@@ -170,13 +188,15 @@ class _$AuthTokenDTOImpl extends _AuthTokenDTO {
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
             (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt));
+                other.expiresAt == expiresAt) &&
+            (identical(other.serverTime, serverTime) ||
+                other.serverTime == serverTime));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, accessToken, refreshToken, expiresAt);
+  int get hashCode => Object.hash(
+      runtimeType, accessToken, refreshToken, expiresAt, serverTime);
 
   /// Create a copy of AuthTokenDTO
   /// with the given fields replaced by the non-null parameter values.
@@ -198,7 +218,8 @@ abstract class _AuthTokenDTO extends AuthTokenDTO {
   const factory _AuthTokenDTO(
           {@JsonKey(name: 'access_token') required final String accessToken,
           @JsonKey(name: 'refresh_token') required final String refreshToken,
-          @JsonKey(name: 'expires_at') required final DateTime expiresAt}) =
+          @JsonKey(name: 'expires_at') required final DateTime expiresAt,
+          @JsonKey(name: 'server_time') required final DateTime serverTime}) =
       _$AuthTokenDTOImpl;
   const _AuthTokenDTO._() : super._();
 
@@ -214,6 +235,9 @@ abstract class _AuthTokenDTO extends AuthTokenDTO {
   @override
   @JsonKey(name: 'expires_at')
   DateTime get expiresAt;
+  @override
+  @JsonKey(name: 'server_time')
+  DateTime get serverTime;
 
   /// Create a copy of AuthTokenDTO
   /// with the given fields replaced by the non-null parameter values.

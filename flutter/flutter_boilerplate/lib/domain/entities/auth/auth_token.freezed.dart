@@ -19,6 +19,7 @@ mixin _$AuthToken {
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
   DateTime get expiresAt => throw _privateConstructorUsedError;
+  DateTime get serverTime => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthToken
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,11 @@ abstract class $AuthTokenCopyWith<$Res> {
   factory $AuthTokenCopyWith(AuthToken value, $Res Function(AuthToken) then) =
       _$AuthTokenCopyWithImpl<$Res, AuthToken>;
   @useResult
-  $Res call({String accessToken, String refreshToken, DateTime expiresAt});
+  $Res call(
+      {String accessToken,
+      String refreshToken,
+      DateTime expiresAt,
+      DateTime serverTime});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$AuthTokenCopyWithImpl<$Res, $Val extends AuthToken>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? expiresAt = null,
+    Object? serverTime = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
@@ -67,6 +73,10 @@ class _$AuthTokenCopyWithImpl<$Res, $Val extends AuthToken>
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      serverTime: null == serverTime
+          ? _value.serverTime
+          : serverTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -79,7 +89,11 @@ abstract class _$$AuthTokenImplCopyWith<$Res>
       __$$AuthTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken, DateTime expiresAt});
+  $Res call(
+      {String accessToken,
+      String refreshToken,
+      DateTime expiresAt,
+      DateTime serverTime});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$AuthTokenImplCopyWithImpl<$Res>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? expiresAt = null,
+    Object? serverTime = null,
   }) {
     return _then(_$AuthTokenImpl(
       accessToken: null == accessToken
@@ -112,6 +127,10 @@ class __$$AuthTokenImplCopyWithImpl<$Res>
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      serverTime: null == serverTime
+          ? _value.serverTime
+          : serverTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -122,7 +141,8 @@ class _$AuthTokenImpl extends _AuthToken {
   const _$AuthTokenImpl(
       {required this.accessToken,
       required this.refreshToken,
-      required this.expiresAt})
+      required this.expiresAt,
+      required this.serverTime})
       : super._();
 
   @override
@@ -131,10 +151,12 @@ class _$AuthTokenImpl extends _AuthToken {
   final String refreshToken;
   @override
   final DateTime expiresAt;
+  @override
+  final DateTime serverTime;
 
   @override
   String toString() {
-    return 'AuthToken(accessToken: $accessToken, refreshToken: $refreshToken, expiresAt: $expiresAt)';
+    return 'AuthToken(accessToken: $accessToken, refreshToken: $refreshToken, expiresAt: $expiresAt, serverTime: $serverTime)';
   }
 
   @override
@@ -147,12 +169,14 @@ class _$AuthTokenImpl extends _AuthToken {
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
             (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt));
+                other.expiresAt == expiresAt) &&
+            (identical(other.serverTime, serverTime) ||
+                other.serverTime == serverTime));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, accessToken, refreshToken, expiresAt);
+  int get hashCode => Object.hash(
+      runtimeType, accessToken, refreshToken, expiresAt, serverTime);
 
   /// Create a copy of AuthToken
   /// with the given fields replaced by the non-null parameter values.
@@ -167,7 +191,8 @@ abstract class _AuthToken extends AuthToken {
   const factory _AuthToken(
       {required final String accessToken,
       required final String refreshToken,
-      required final DateTime expiresAt}) = _$AuthTokenImpl;
+      required final DateTime expiresAt,
+      required final DateTime serverTime}) = _$AuthTokenImpl;
   const _AuthToken._() : super._();
 
   @override
@@ -176,6 +201,8 @@ abstract class _AuthToken extends AuthToken {
   String get refreshToken;
   @override
   DateTime get expiresAt;
+  @override
+  DateTime get serverTime;
 
   /// Create a copy of AuthToken
   /// with the given fields replaced by the non-null parameter values.
