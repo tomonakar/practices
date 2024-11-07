@@ -1,4 +1,4 @@
-// lib/data/providers/datasource_providers.dart
+import 'package:flutter_boilerplate/data/datasources/local/implementations/auth_local_data_source_impl.dart';
 import 'package:flutter_boilerplate/data/datasources/local/implementations/user_local_data_source_impl.dart';
 import 'package:flutter_boilerplate/data/datasources/local/interfaces/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/data/datasources/local/interfaces/user_local_data_source.dart';
@@ -27,8 +27,9 @@ UserRemoteDataSource userRemoteDataSource(Ref ref) {
 }
 
 @riverpod
-AuthLocalDataSource authLocalDataSource(Ref ref) {
-  return AuthLocalDataSourceImpl();
+Future<AuthLocalDataSource> authLocalDataSource(Ref ref) async {
+  final prefs = await ref.watch(sharedPreferencesProvider.future);
+  return AuthLocalDataSourceImpl(prefs);
 }
 
 @riverpod

@@ -45,12 +45,12 @@ final userRemoteDataSourceProvider =
 // ignore: unused_element
 typedef UserRemoteDataSourceRef = AutoDisposeProviderRef<UserRemoteDataSource>;
 String _$authLocalDataSourceHash() =>
-    r'f28d447c0de8bc28b70a84c9bea5a099791a93ba';
+    r'342cda0898b19a014a79c60b605aa62cf698e836';
 
 /// See also [authLocalDataSource].
 @ProviderFor(authLocalDataSource)
 final authLocalDataSourceProvider =
-    AutoDisposeProvider<AuthLocalDataSource>.internal(
+    AutoDisposeFutureProvider<AuthLocalDataSource>.internal(
   authLocalDataSource,
   name: r'authLocalDataSourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -62,7 +62,8 @@ final authLocalDataSourceProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AuthLocalDataSourceRef = AutoDisposeProviderRef<AuthLocalDataSource>;
+typedef AuthLocalDataSourceRef
+    = AutoDisposeFutureProviderRef<AuthLocalDataSource>;
 String _$userLocalDataSourceHash() =>
     r'b41695ea24465fcaec5c13685cea79f2924c00e2';
 

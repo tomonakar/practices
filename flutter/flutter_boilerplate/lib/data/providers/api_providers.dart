@@ -1,5 +1,6 @@
 // lib/data/providers/api_providers.dart
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate/core/providers/env_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../datasources/remote/api/api_client.dart';
@@ -33,7 +34,7 @@ Dio dio(Ref ref) {
 }
 
 @riverpod
-ApiClient apiClient(ApiClientRef ref) {
+ApiClient apiClient(Ref ref) {
   final dio = ref.watch(dioProvider);
   return ApiClient(dio);
 }

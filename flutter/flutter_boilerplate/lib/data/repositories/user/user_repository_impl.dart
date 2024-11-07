@@ -247,6 +247,7 @@ class UserRepositoryImpl implements UserRepository {
       server: (message) => AppError.api(500, message),
       cache: (message) => AppError.cache(message),
       parse: (message) => AppError.invalidData(message),
+      unknown: (message) => AppError.unknown(message),
     );
   }
 }

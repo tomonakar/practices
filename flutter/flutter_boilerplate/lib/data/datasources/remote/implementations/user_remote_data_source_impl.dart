@@ -16,12 +16,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required String userId,
   }) async {
     try {
-      final response = await _apiClient.getUser(
+      final httpResponse = await _apiClient.getUser(
         'Bearer $accessToken',
         userId,
       );
 
-      if (!response.success || response.data == null) {
+      final response = httpResponse.data;
+
+      if (response.success || response.data == null) {
         throw DataSourceException.notFound(
           response.errorMessage ?? 'ユーザーが見つかりません',
         );
@@ -40,11 +42,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required Map<String, dynamic> userData,
   }) async {
     try {
-      final response = await _apiClient.updateUser(
+      final httpResponse = await _apiClient.updateUser(
         'Bearer $accessToken',
         userId,
         userData,
       );
+
+      final response = httpResponse.data;
 
       if (!response.success || response.data == null) {
         throw DataSourceException.badRequest(
@@ -87,10 +91,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         if (query != null && query.isNotEmpty) 'q': query,
       };
 
-      final response = await _apiClient.getUsers(
+      final httpResponse = await _apiClient.getUsers(
         'Bearer $accessToken',
         queryParams,
       );
+
+      final response = httpResponse.data;
 
       if (!response.success || response.data == null) {
         throw const DataSourceException.badRequest('ユーザー一覧の取得に失敗しました');
@@ -111,10 +117,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required String userId,
   }) async {
     try {
-      final response = await _apiClient.getUserProfile(
+      final httpResponse = await _apiClient.getUserProfile(
         'Bearer $accessToken',
         userId,
       );
+
+      final response = httpResponse.data;
 
       if (!response.success || response.data == null) {
         throw DataSourceException.notFound(
@@ -135,11 +143,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required Map<String, dynamic> profileData,
   }) async {
     try {
-      final response = await _apiClient.updateUserProfile(
+      final httpResponse = await _apiClient.updateUserProfile(
         'Bearer $accessToken',
         userId,
         profileData,
       );
+
+      final response = httpResponse.data;
 
       if (!response.success || response.data == null) {
         throw DataSourceException.badRequest(

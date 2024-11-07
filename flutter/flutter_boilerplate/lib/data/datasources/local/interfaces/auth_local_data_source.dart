@@ -15,4 +15,6 @@ abstract class AuthLocalDataSource {
   Future<void> deleteCurrentUser();
 
   Future<bool> hasValidAuthToken();
+
+  Future<void> clearAll();
 }
