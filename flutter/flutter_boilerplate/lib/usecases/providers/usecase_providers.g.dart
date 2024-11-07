@@ -23,6 +23,23 @@ final signInUseCaseProvider = Provider<SignInUseCase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SignInUseCaseRef = ProviderRef<SignInUseCase>;
+String _$signOutUseCaseHash() => r'952ce342ca22dc7bb696cc8e5787d2889240ef98';
+
+/// See also [signOutUseCase].
+@ProviderFor(signOutUseCase)
+final signOutUseCaseProvider = AutoDisposeProvider<SignOutUseCase>.internal(
+  signOutUseCase,
+  name: r'signOutUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$signOutUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SignOutUseCaseRef = AutoDisposeProviderRef<SignOutUseCase>;
 String _$getCurrentUserUseCaseHash() =>
     r'3595198bd0d2e3c3231aac1fc13c404fa6f757e6';
 
