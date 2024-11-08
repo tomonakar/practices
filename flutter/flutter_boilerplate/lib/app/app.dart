@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/providers/env_provider.dart';
 import 'package:flutter_boilerplate/presentation/pages/splash/splash_page.dart';
@@ -18,7 +19,31 @@ class App extends ConsumerWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: !config.isProduction, // 本番環境ではデバッグバナーを非表示
-      home: const SplashPage(), // スプラッシュ画面から開始
+      home: _flavorBanner(
+          message: config.appName,
+          child: const SplashPage(),
+          show: kDebugMode), // スプラッシュ画面から開始
     );
   }
 }
+
+Widget _flavorBanner({
+  required String message,
+  required Widget child,
+  bool show = true,
+}) =>
+    show
+        ? Banner(
+            child: child,
+            location: BannerLocation.topStart,
+            message: message,
+            color: Colors.green.withOpacity(0.6),
+            textStyle: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 12.0,
+                letterSpacing: 1.0),
+            textDirection: TextDirection.ltr,
+          )
+        : Container(
+            child: child,
+          );

@@ -170,6 +170,6 @@ flavorizr:
     - ios:schema
     - ios:plist
     # flutter関連の生成を無効化
-    # - flutter:flavors
-    # - flutter:app
-    # - flutter:main
+    - flutter:flavors
+    - flutter:app
+    - flutter:main
