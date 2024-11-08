@@ -159,9 +159,10 @@ class __$$NetworkErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NetworkErrorImpl extends NetworkError {
-  const _$NetworkErrorImpl({this.message}) : super._();
+  const _$NetworkErrorImpl({this.message = 'ネットワークエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -318,7 +319,7 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$ApiErrorImpl(
-      freezed == statusCode
+      statusCode: freezed == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -333,11 +334,13 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ApiErrorImpl extends ApiError {
-  const _$ApiErrorImpl(this.statusCode, {this.message}) : super._();
+  const _$ApiErrorImpl({this.statusCode, this.message = 'APIエラーが発生しました'})
+      : super._();
 
   @override
   final int? statusCode;
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -454,7 +457,7 @@ class _$ApiErrorImpl extends ApiError {
 }
 
 abstract class ApiError extends AppError {
-  const factory ApiError(final int? statusCode, {final String? message}) =
+  const factory ApiError({final int? statusCode, final String? message}) =
       _$ApiErrorImpl;
   const ApiError._() : super._();
 
@@ -508,9 +511,10 @@ class __$$UnauthorizedErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnauthorizedErrorImpl extends UnauthorizedError {
-  const _$UnauthorizedErrorImpl({this.message}) : super._();
+  const _$UnauthorizedErrorImpl({this.message = '認証エラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -679,9 +683,10 @@ class __$$UnknownErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownErrorImpl extends UnknownError {
-  const _$UnknownErrorImpl({this.message}) : super._();
+  const _$UnknownErrorImpl({this.message = '予期せぬエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -848,9 +853,10 @@ class __$$InvalidDataErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InvalidDataErrorImpl extends InvalidDataError {
-  const _$InvalidDataErrorImpl({this.message}) : super._();
+  const _$InvalidDataErrorImpl({this.message = 'データの形式が正しくありません'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -1019,9 +1025,10 @@ class __$$CacheErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CacheErrorImpl extends CacheError {
-  const _$CacheErrorImpl({this.message}) : super._();
+  const _$CacheErrorImpl({this.message = 'キャッシュエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override

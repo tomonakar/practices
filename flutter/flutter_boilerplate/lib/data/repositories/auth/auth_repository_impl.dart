@@ -187,10 +187,10 @@ class AuthRepositoryImpl implements AuthRepository {
   AppError _mapDataSourceError(DataSourceException exception) {
     return exception.when(
       network: (message) => AppError.network(message: message),
-      notFound: (message) => AppError.api(404, message: message),
+      notFound: (message) => AppError.api(statusCode: 404),
       unauthorized: (message) => AppError.unauthorized(message: message),
-      badRequest: (message) => AppError.api(400, message: message),
-      server: (message) => AppError.api(500, message: message),
+      badRequest: (message) => AppError.api(statusCode: 400, message: message),
+      server: (message) => AppError.api(statusCode: 500, message: message),
       cache: (message) => AppError.cache(message: message),
       parse: (message) => AppError.invalidData(message: message),
       unknown: (message) => AppError.unknown(message: message),

@@ -172,9 +172,10 @@ class __$$NetworkExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NetworkExceptionImpl extends NetworkException {
-  const _$NetworkExceptionImpl({this.message}) : super._();
+  const _$NetworkExceptionImpl({this.message = 'ネットワークエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -355,9 +356,10 @@ class __$$NotFoundExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NotFoundExceptionImpl extends NotFoundException {
-  const _$NotFoundExceptionImpl({this.message}) : super._();
+  const _$NotFoundExceptionImpl({this.message = 'リソースが見つかりません'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -539,9 +541,11 @@ class __$$UnauthorizedExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnauthorizedExceptionImpl extends UnauthorizedException {
-  const _$UnauthorizedExceptionImpl({this.message}) : super._();
+  const _$UnauthorizedExceptionImpl({this.message = '認証エラーが発生しました'})
+      : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -722,9 +726,10 @@ class __$$BadRequestExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BadRequestExceptionImpl extends BadRequestException {
-  const _$BadRequestExceptionImpl({this.message}) : super._();
+  const _$BadRequestExceptionImpl({this.message = 'リクエストが不正です'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -905,9 +910,10 @@ class __$$ServerExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ServerExceptionImpl extends ServerException {
-  const _$ServerExceptionImpl({this.message}) : super._();
+  const _$ServerExceptionImpl({this.message = 'サーバーエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -1088,9 +1094,10 @@ class __$$CacheExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CacheExceptionImpl extends CacheException {
-  const _$CacheExceptionImpl({this.message}) : super._();
+  const _$CacheExceptionImpl({this.message = 'キャッシュエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -1270,9 +1277,10 @@ class __$$ParseExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ParseExceptionImpl extends ParseException {
-  const _$ParseExceptionImpl({this.message}) : super._();
+  const _$ParseExceptionImpl({this.message = 'データの解析に失敗しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
@@ -1452,9 +1460,10 @@ class __$$UnknownExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownExceptionImpl extends UnknownException {
-  const _$UnknownExceptionImpl({this.message}) : super._();
+  const _$UnknownExceptionImpl({this.message = '予期せぬエラーが発生しました'}) : super._();
 
   @override
+  @JsonKey()
   final String? message;
 
   @override
