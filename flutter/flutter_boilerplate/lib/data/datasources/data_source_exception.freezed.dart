@@ -161,7 +161,7 @@ class __$$NetworkExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$NetworkExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -172,7 +172,7 @@ class __$$NetworkExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NetworkExceptionImpl extends NetworkException {
-  const _$NetworkExceptionImpl([this.message]) : super._();
+  const _$NetworkExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -302,7 +302,7 @@ class _$NetworkExceptionImpl extends NetworkException {
 }
 
 abstract class NetworkException extends DataSourceException {
-  const factory NetworkException([final String? message]) =
+  const factory NetworkException({final String? message}) =
       _$NetworkExceptionImpl;
   const NetworkException._() : super._();
 
@@ -344,7 +344,7 @@ class __$$NotFoundExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$NotFoundExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -355,7 +355,7 @@ class __$$NotFoundExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NotFoundExceptionImpl extends NotFoundException {
-  const _$NotFoundExceptionImpl([this.message]) : super._();
+  const _$NotFoundExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -485,7 +485,7 @@ class _$NotFoundExceptionImpl extends NotFoundException {
 }
 
 abstract class NotFoundException extends DataSourceException {
-  const factory NotFoundException([final String? message]) =
+  const factory NotFoundException({final String? message}) =
       _$NotFoundExceptionImpl;
   const NotFoundException._() : super._();
 
@@ -528,7 +528,7 @@ class __$$UnauthorizedExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$UnauthorizedExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -539,7 +539,7 @@ class __$$UnauthorizedExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnauthorizedExceptionImpl extends UnauthorizedException {
-  const _$UnauthorizedExceptionImpl([this.message]) : super._();
+  const _$UnauthorizedExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -669,7 +669,7 @@ class _$UnauthorizedExceptionImpl extends UnauthorizedException {
 }
 
 abstract class UnauthorizedException extends DataSourceException {
-  const factory UnauthorizedException([final String? message]) =
+  const factory UnauthorizedException({final String? message}) =
       _$UnauthorizedExceptionImpl;
   const UnauthorizedException._() : super._();
 
@@ -711,7 +711,7 @@ class __$$BadRequestExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$BadRequestExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -722,7 +722,7 @@ class __$$BadRequestExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BadRequestExceptionImpl extends BadRequestException {
-  const _$BadRequestExceptionImpl([this.message]) : super._();
+  const _$BadRequestExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -852,7 +852,7 @@ class _$BadRequestExceptionImpl extends BadRequestException {
 }
 
 abstract class BadRequestException extends DataSourceException {
-  const factory BadRequestException([final String? message]) =
+  const factory BadRequestException({final String? message}) =
       _$BadRequestExceptionImpl;
   const BadRequestException._() : super._();
 
@@ -894,7 +894,7 @@ class __$$ServerExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$ServerExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -905,7 +905,7 @@ class __$$ServerExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ServerExceptionImpl extends ServerException {
-  const _$ServerExceptionImpl([this.message]) : super._();
+  const _$ServerExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -1035,7 +1035,7 @@ class _$ServerExceptionImpl extends ServerException {
 }
 
 abstract class ServerException extends DataSourceException {
-  const factory ServerException([final String? message]) =
+  const factory ServerException({final String? message}) =
       _$ServerExceptionImpl;
   const ServerException._() : super._();
 
@@ -1077,7 +1077,7 @@ class __$$CacheExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$CacheExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1088,7 +1088,7 @@ class __$$CacheExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CacheExceptionImpl extends CacheException {
-  const _$CacheExceptionImpl([this.message]) : super._();
+  const _$CacheExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -1218,7 +1218,7 @@ class _$CacheExceptionImpl extends CacheException {
 }
 
 abstract class CacheException extends DataSourceException {
-  const factory CacheException([final String? message]) = _$CacheExceptionImpl;
+  const factory CacheException({final String? message}) = _$CacheExceptionImpl;
   const CacheException._() : super._();
 
   @override
@@ -1259,7 +1259,7 @@ class __$$ParseExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$ParseExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1270,7 +1270,7 @@ class __$$ParseExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ParseExceptionImpl extends ParseException {
-  const _$ParseExceptionImpl([this.message]) : super._();
+  const _$ParseExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -1400,7 +1400,7 @@ class _$ParseExceptionImpl extends ParseException {
 }
 
 abstract class ParseException extends DataSourceException {
-  const factory ParseException([final String? message]) = _$ParseExceptionImpl;
+  const factory ParseException({final String? message}) = _$ParseExceptionImpl;
   const ParseException._() : super._();
 
   @override
@@ -1441,7 +1441,7 @@ class __$$UnknownExceptionImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$UnknownExceptionImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1452,7 +1452,7 @@ class __$$UnknownExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownExceptionImpl extends UnknownException {
-  const _$UnknownExceptionImpl([this.message]) : super._();
+  const _$UnknownExceptionImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -1582,7 +1582,7 @@ class _$UnknownExceptionImpl extends UnknownException {
 }
 
 abstract class UnknownException extends DataSourceException {
-  const factory UnknownException([final String? message]) =
+  const factory UnknownException({final String? message}) =
       _$UnknownExceptionImpl;
   const UnknownException._() : super._();
 

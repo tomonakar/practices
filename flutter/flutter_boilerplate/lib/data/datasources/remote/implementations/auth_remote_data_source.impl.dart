@@ -29,7 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (!response.success || response.data == null) {
         throw DataSourceException.unauthorized(
-          response.errorMessage ?? '認証に失敗しました',
+          message: response.errorMessage ?? '認証に失敗しました',
         );
       }
 
@@ -60,11 +60,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final httpResponse =
           await _apiClient.getCurrentUser('Bearer $accessToken');
       final response = httpResponse.data;
-      final headers = httpResponse.response.headers.map;
 
       if (!response.success || response.data == null) {
         throw DataSourceException.unauthorized(
-          response.errorMessage ?? 'ユーザー情報の取得に失敗しました',
+          message: response.errorMessage ?? 'ユーザー情報の取得に失敗しました',
         );
       }
 
@@ -84,7 +83,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (!response.success || response.data == null) {
         throw DataSourceException.unauthorized(
-          response.errorMessage ?? 'トークンの更新に失敗しました',
+          message: response.errorMessage ?? 'トークンの更新に失敗しました',
         );
       }
 
@@ -156,35 +155,35 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return const DataSourceException.network('接続がタイムアウトしました');
+        return const DataSourceException.network(message: '接続がタイムアウトしました');
 
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
         switch (statusCode) {
           case 400:
             return DataSourceException.badRequest(
-              error.response?.data?['message'] ?? '不正なリクエストです',
+              message: error.response?.data?['message'] ?? '不正なリクエストです',
             );
           case 401:
             return DataSourceException.unauthorized(
-              error.response?.data?['message'] ?? '認証エラーが発生しました',
+              message: error.response?.data?['message'] ?? '認証エラーが発生しました',
             );
           case 404:
             return DataSourceException.notFound(
-              error.response?.data?['message'] ?? 'リソースが見つかりません',
+              message: error.response?.data?['message'] ?? 'リソースが見つかりません',
             );
           case 500:
             return DataSourceException.server(
-              error.response?.data?['message'] ?? 'サーバーエラーが発生しました',
+              message: error.response?.data?['message'] ?? 'サーバーエラーが発生しました',
             );
           default:
             return DataSourceException.unknown(
-              error.response?.data?['message'] ?? '予期せぬエラーが発生しました',
+              message: error.response?.data?['message'] ?? '予期せぬエラーが発生しました',
             );
         }
 
       default:
-        return const DataSourceException.network('ネットワークエラーが発生しました');
+        return const DataSourceException.network(message: 'ネットワークエラーが発生しました');
     }
   }
 }

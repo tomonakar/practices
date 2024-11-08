@@ -1,26 +1,26 @@
-// lib/data/datasources/data_source_exception.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'data_source_exception.freezed.dart';
 
 @freezed
 class DataSourceException with _$DataSourceException implements Exception {
-  const factory DataSourceException.network([String? message]) =
+  const factory DataSourceException.network({String? message}) =
       NetworkException;
-  const factory DataSourceException.notFound([String? message]) =
+  const factory DataSourceException.notFound({String? message}) =
       NotFoundException;
-  const factory DataSourceException.unauthorized([String? message]) =
+  const factory DataSourceException.unauthorized({String? message}) =
       UnauthorizedException;
-  const factory DataSourceException.badRequest([String? message]) =
+  const factory DataSourceException.badRequest({String? message}) =
       BadRequestException;
-  const factory DataSourceException.server([String? message]) = ServerException;
-  const factory DataSourceException.cache([String? message]) = CacheException;
-  const factory DataSourceException.parse([String? message]) = ParseException;
-  const factory DataSourceException.unknown([String? message]) =
+  const factory DataSourceException.server({String? message}) = ServerException;
+  const factory DataSourceException.cache({String? message}) = CacheException;
+  const factory DataSourceException.parse({String? message}) = ParseException;
+  const factory DataSourceException.unknown({String? message}) =
       UnknownException;
 
   const DataSourceException._();
 
+  @override
   String get message => when(
         network: (message) => message ?? 'ネットワークエラーが発生しました',
         notFound: (message) => message ?? 'リソースが見つかりません',

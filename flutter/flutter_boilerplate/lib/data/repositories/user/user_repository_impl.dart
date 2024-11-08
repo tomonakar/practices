@@ -34,7 +34,8 @@ class UserRepositoryImpl implements UserRepository {
 
       // トークンが期限切れの場合
       if (token.isExpired) {
-        return const Result.failure(AppError.unauthorized('認証の有効期限が切れています'));
+        return const Result.failure(
+            AppError.unauthorized(message: '認証の有効期限が切れています'));
       }
 
       // ローカルにキャッシュされたユーザー情報を確認
@@ -60,7 +61,7 @@ class UserRepositoryImpl implements UserRepository {
       }
       return Result.failure(_mapDataSourceError(e));
     } catch (e) {
-      return Result.failure(AppError.unknown(e.toString()));
+      return Result.failure(AppError.unknown(message: e.toString()));
     }
   }
 
@@ -240,14 +241,14 @@ class UserRepositoryImpl implements UserRepository {
   // DataSourceExceptionをAppErrorに変換するヘルパーメソッド
   AppError _mapDataSourceError(DataSourceException exception) {
     return exception.when(
-      network: (message) => AppError.network(message),
-      notFound: (message) => AppError.api(404, message),
-      unauthorized: (message) => AppError.unauthorized(message),
-      badRequest: (message) => AppError.api(400, message),
-      server: (message) => AppError.api(500, message),
-      cache: (message) => AppError.cache(message),
-      parse: (message) => AppError.invalidData(message),
-      unknown: (message) => AppError.unknown(message),
+      network: (message) => AppError.network(message: message),
+      notFound: (message) => AppError.api(404, message: message),
+      unauthorized: (message) => AppError.unauthorized(message: message),
+      badRequest: (message) => AppError.api(400, message: message),
+      server: (message) => AppError.api(500, message: message),
+      cache: (message) => AppError.cache(message: message),
+      parse: (message) => AppError.invalidData(message: message),
+      unknown: (message) => AppError.unknown(message: message),
     );
   }
 }

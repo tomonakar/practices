@@ -25,7 +25,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (response.success || response.data == null) {
         throw DataSourceException.notFound(
-          response.errorMessage ?? 'ユーザーが見つかりません',
+          message: response.errorMessage ?? 'ユーザーが見つかりません',
         );
       }
 
@@ -52,7 +52,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (!response.success || response.data == null) {
         throw DataSourceException.badRequest(
-          response.errorMessage ?? 'ユーザー情報の更新に失敗しました',
+          message: response.errorMessage ?? 'ユーザー情報の更新に失敗しました',
         );
       }
 
@@ -99,7 +99,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       final response = httpResponse.data;
 
       if (!response.success || response.data == null) {
-        throw const DataSourceException.badRequest('ユーザー一覧の取得に失敗しました');
+        throw const DataSourceException.badRequest(message: 'ユーザー一覧の取得に失敗しました');
       }
 
       return (
@@ -126,7 +126,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (!response.success || response.data == null) {
         throw DataSourceException.notFound(
-          response.errorMessage ?? 'ユーザープロフィールが見つかりません',
+          message: response.errorMessage ?? 'ユーザープロフィールが見つかりません',
         );
       }
 
@@ -153,7 +153,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (!response.success || response.data == null) {
         throw DataSourceException.badRequest(
-          response.errorMessage ?? 'プロフィールの更新に失敗しました',
+          message: response.errorMessage ?? 'プロフィールの更新に失敗しました',
         );
       }
 
@@ -168,35 +168,35 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return const DataSourceException.network('接続がタイムアウトしました');
+        return const DataSourceException.network(message: '接続がタイムアウトしました');
 
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
         switch (statusCode) {
           case 400:
             return DataSourceException.badRequest(
-              error.response?.data?['message'] ?? '不正なリクエストです',
+              message: error.response?.data?['message'] ?? '不正なリクエストです',
             );
           case 401:
             return DataSourceException.unauthorized(
-              error.response?.data?['message'] ?? '認証エラーが発生しました',
+              message: error.response?.data?['message'] ?? '認証エラーが発生しました',
             );
           case 404:
             return DataSourceException.notFound(
-              error.response?.data?['message'] ?? 'リソースが見つかりません',
+              message: error.response?.data?['message'] ?? 'リソースが見つかりません',
             );
           case 500:
             return DataSourceException.server(
-              error.response?.data?['message'] ?? 'サーバーエラーが発生しました',
+              message: error.response?.data?['message'] ?? 'サーバーエラーが発生しました',
             );
           default:
             return DataSourceException.unknown(
-              error.response?.data?['message'] ?? '予期せぬエラーが発生しました',
+              message: error.response?.data?['message'] ?? '予期せぬエラーが発生しました',
             );
         }
 
       default:
-        return const DataSourceException.network('ネットワークエラーが発生しました');
+        return const DataSourceException.network(message: 'ネットワークエラーが発生しました');
     }
   }
 }

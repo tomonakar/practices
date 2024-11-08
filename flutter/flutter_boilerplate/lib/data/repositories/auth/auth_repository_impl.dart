@@ -144,7 +144,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on DataSourceException catch (e) {
       return Result.failure(_mapDataSourceError(e));
     } catch (e) {
-      return Result.failure(AppError.unknown(e.toString()));
+      return Result.failure(AppError.unknown(message: e.toString()));
     }
   }
 
@@ -179,21 +179,21 @@ class AuthRepositoryImpl implements AuthRepository {
     } on DataSourceException catch (e) {
       return Result.failure(_mapDataSourceError(e));
     } catch (e) {
-      return Result.failure(AppError.unknown(e.toString()));
+      return Result.failure(AppError.unknown(message: e.toString()));
     }
   }
 
   // DataSourceExceptionをAppErrorに変換するヘルパーメソッド
   AppError _mapDataSourceError(DataSourceException exception) {
     return exception.when(
-      network: (message) => AppError.network(message),
-      notFound: (message) => AppError.api(404, message),
-      unauthorized: (message) => AppError.unauthorized(message),
-      badRequest: (message) => AppError.api(400, message),
-      server: (message) => AppError.api(500, message),
-      cache: (message) => AppError.cache(message),
-      parse: (message) => AppError.invalidData(message),
-      unknown: (message) => AppError.unknown(message),
+      network: (message) => AppError.network(message: message),
+      notFound: (message) => AppError.api(404, message: message),
+      unauthorized: (message) => AppError.unauthorized(message: message),
+      badRequest: (message) => AppError.api(400, message: message),
+      server: (message) => AppError.api(500, message: message),
+      cache: (message) => AppError.cache(message: message),
+      parse: (message) => AppError.invalidData(message: message),
+      unknown: (message) => AppError.unknown(message: message),
     );
   }
 }

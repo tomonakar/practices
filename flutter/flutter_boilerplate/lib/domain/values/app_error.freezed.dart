@@ -148,7 +148,7 @@ class __$$NetworkErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$NetworkErrorImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -159,7 +159,7 @@ class __$$NetworkErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NetworkErrorImpl extends NetworkError {
-  const _$NetworkErrorImpl([this.message]) : super._();
+  const _$NetworkErrorImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -276,7 +276,7 @@ class _$NetworkErrorImpl extends NetworkError {
 }
 
 abstract class NetworkError extends AppError {
-  const factory NetworkError([final String? message]) = _$NetworkErrorImpl;
+  const factory NetworkError({final String? message}) = _$NetworkErrorImpl;
   const NetworkError._() : super._();
 
   @override
@@ -322,7 +322,7 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int?,
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -333,7 +333,7 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ApiErrorImpl extends ApiError {
-  const _$ApiErrorImpl(this.statusCode, [this.message]) : super._();
+  const _$ApiErrorImpl(this.statusCode, {this.message}) : super._();
 
   @override
   final int? statusCode;
@@ -454,7 +454,7 @@ class _$ApiErrorImpl extends ApiError {
 }
 
 abstract class ApiError extends AppError {
-  const factory ApiError(final int? statusCode, [final String? message]) =
+  const factory ApiError(final int? statusCode, {final String? message}) =
       _$ApiErrorImpl;
   const ApiError._() : super._();
 
@@ -497,7 +497,7 @@ class __$$UnauthorizedErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$UnauthorizedErrorImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -508,7 +508,7 @@ class __$$UnauthorizedErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnauthorizedErrorImpl extends UnauthorizedError {
-  const _$UnauthorizedErrorImpl([this.message]) : super._();
+  const _$UnauthorizedErrorImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -626,7 +626,7 @@ class _$UnauthorizedErrorImpl extends UnauthorizedError {
 }
 
 abstract class UnauthorizedError extends AppError {
-  const factory UnauthorizedError([final String? message]) =
+  const factory UnauthorizedError({final String? message}) =
       _$UnauthorizedErrorImpl;
   const UnauthorizedError._() : super._();
 
@@ -668,7 +668,7 @@ class __$$UnknownErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$UnknownErrorImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -679,7 +679,7 @@ class __$$UnknownErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownErrorImpl extends UnknownError {
-  const _$UnknownErrorImpl([this.message]) : super._();
+  const _$UnknownErrorImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -796,7 +796,7 @@ class _$UnknownErrorImpl extends UnknownError {
 }
 
 abstract class UnknownError extends AppError {
-  const factory UnknownError([final String? message]) = _$UnknownErrorImpl;
+  const factory UnknownError({final String? message}) = _$UnknownErrorImpl;
   const UnknownError._() : super._();
 
   @override
@@ -837,7 +837,7 @@ class __$$InvalidDataErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$InvalidDataErrorImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -848,7 +848,7 @@ class __$$InvalidDataErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InvalidDataErrorImpl extends InvalidDataError {
-  const _$InvalidDataErrorImpl([this.message]) : super._();
+  const _$InvalidDataErrorImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -966,7 +966,7 @@ class _$InvalidDataErrorImpl extends InvalidDataError {
 }
 
 abstract class InvalidDataError extends AppError {
-  const factory InvalidDataError([final String? message]) =
+  const factory InvalidDataError({final String? message}) =
       _$InvalidDataErrorImpl;
   const InvalidDataError._() : super._();
 
@@ -1008,7 +1008,7 @@ class __$$CacheErrorImplCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$CacheErrorImpl(
-      freezed == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1019,7 +1019,7 @@ class __$$CacheErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CacheErrorImpl extends CacheError {
-  const _$CacheErrorImpl([this.message]) : super._();
+  const _$CacheErrorImpl({this.message}) : super._();
 
   @override
   final String? message;
@@ -1136,7 +1136,7 @@ class _$CacheErrorImpl extends CacheError {
 }
 
 abstract class CacheError extends AppError {
-  const factory CacheError([final String? message]) = _$CacheErrorImpl;
+  const factory CacheError({final String? message}) = _$CacheErrorImpl;
   const CacheError._() : super._();
 
   @override

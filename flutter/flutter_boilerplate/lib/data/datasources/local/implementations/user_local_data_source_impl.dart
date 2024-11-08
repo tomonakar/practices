@@ -34,7 +34,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
       stmt.dispose();
     } catch (e) {
-      throw DataSourceException.cache('ユーザー情報のキャッシュに失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザー情報のキャッシュに失敗しました: $e');
     }
   }
 
@@ -62,7 +62,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
         updatedAt: DateTime.parse(row['updated_at'] as String),
       );
     } catch (e) {
-      throw DataSourceException.cache('キャッシュの取得に失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュの取得に失敗しました: $e');
     }
   }
 
@@ -73,7 +73,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       stmt.execute([userId]);
       stmt.dispose();
     } catch (e) {
-      throw DataSourceException.cache('キャッシュの削除に失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュの削除に失敗しました: $e');
     }
   }
 
@@ -95,7 +95,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
               ))
           .toList();
     } catch (e) {
-      throw DataSourceException.cache('キャッシュの取得に失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュの取得に失敗しました: $e');
     }
   }
 
@@ -115,7 +115,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
       return DateTime.parse(result.first['cache_time'] as String);
     } catch (e) {
-      throw DataSourceException.cache('キャッシュ時間の取得に失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュ時間の取得に失敗しました: $e');
     }
   }
 
@@ -124,7 +124,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     try {
       _db.execute('DELETE FROM users');
     } catch (e) {
-      throw DataSourceException.cache('キャッシュのクリアに失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュのクリアに失敗しました: $e');
     }
   }
 
@@ -149,7 +149,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
       stmt.dispose();
     } catch (e) {
-      throw DataSourceException.cache('ユーザープロフィールのキャッシュに失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザープロフィールのキャッシュに失敗しました: $e');
     }
   }
 
@@ -160,7 +160,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       stmt.execute([userId]);
       stmt.dispose();
     } catch (e) {
-      throw DataSourceException.cache('ユーザープロフィールの削除に失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザープロフィールの削除に失敗しました: $e');
     }
   }
 
@@ -188,7 +188,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
         preferences: row['preferences'] as Map<String, dynamic>,
       );
     } catch (e) {
-      throw DataSourceException.cache('ユーザープロフィールの取得に失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザープロフィールの取得に失敗しました: $e');
     }
   }
 }

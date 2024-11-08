@@ -24,7 +24,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
       await _prefs.setString(keyAuthToken, tokenJson);
     } catch (e) {
-      throw DataSourceException.cache('認証トークンの保存に失敗しました: $e');
+      throw DataSourceException.cache(message: '認証トークンの保存に失敗しました: $e');
     }
   }
 
@@ -44,7 +44,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         serverTime: DateTime.parse(tokenMap['server_time'] as String),
       );
     } catch (e) {
-      throw DataSourceException.cache('認証トークンの取得に失敗しました: $e');
+      throw DataSourceException.cache(message: '認証トークンの取得に失敗しました: $e');
     }
   }
 
@@ -53,7 +53,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     try {
       await _prefs.remove(keyAuthToken);
     } catch (e) {
-      throw DataSourceException.cache('認証トークンの削除に失敗しました: $e');
+      throw DataSourceException.cache(message: '認証トークンの削除に失敗しました: $e');
     }
   }
 
@@ -71,7 +71,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
       await _prefs.setString(keyCurrentUser, userJson);
     } catch (e) {
-      throw DataSourceException.cache('ユーザー情報の保存に失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザー情報の保存に失敗しました: $e');
     }
   }
 
@@ -93,7 +93,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         updatedAt: DateTime.parse(userMap['updated_at'] as String),
       );
     } catch (e) {
-      throw DataSourceException.cache('ユーザー情報の取得に失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザー情報の取得に失敗しました: $e');
     }
   }
 
@@ -102,7 +102,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     try {
       await _prefs.remove(keyCurrentUser);
     } catch (e) {
-      throw DataSourceException.cache('ユーザー情報の削除に失敗しました: $e');
+      throw DataSourceException.cache(message: 'ユーザー情報の削除に失敗しました: $e');
     }
   }
 
@@ -128,7 +128,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         deleteCurrentUser(),
       ]);
     } catch (e) {
-      throw DataSourceException.cache('キャッシュのクリアに失敗しました: $e');
+      throw DataSourceException.cache(message: 'キャッシュのクリアに失敗しました: $e');
     }
   }
 }
