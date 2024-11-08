@@ -37,6 +37,10 @@ coverage: ## Run tests with coverage
 	flutter test --coverage
 	genhtml coverage/lcov.info -o coverage/html
 
+.PHONY: flavor
+flavor: ## Set flavor environment
+	dart run flutter_flavorizr
+
 .PHONY: build-dev
 build-dev: ## Build development
 	flutter build apk --flavor development -t lib/main_development.dart

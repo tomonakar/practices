@@ -3,6 +3,8 @@
 		"datasource",
 		"datasources",
 		"flavorizr",
-		"prefs"
+		"Podfile",
+		"prefs",
+		"pubspec"
 	]
 }

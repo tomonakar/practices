@@ -82,7 +82,7 @@ dev_dependencies:
   # Flavor
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.2
-  flutter_flavorizr: ^2.2.3
+  flutter_flavorizr: ^2.2.3 # flavorの自動設定
   sentry_dart_plugin: ^2.1.0
 
 # Flutter configuration
@@ -120,3 +120,56 @@ flutter_native_splash:
   production:
     color: "#42a5f5"
     image: "assets/splash/splash.png"
+
+# Flutter flavorizr configuration
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "environment"
+    ios:
+      xcodeproj: Runner.xcodeproj
+      
+  flavors:
+    development:
+      app:
+        name: "MyApp Dev"
+      android:
+        applicationId: "com.example.flutter_boilerplate.dev"
+      ios:
+        bundleId: "com.example.flutterBoilerplate.dev"
+        customScheme: "flutterboilerplatedev"  # 追加
+        customEntitlements: "Runner/Runner.entitlements"  #
+        
+    staging:
+      app:
+        name: "MyApp Stg"
+      android:
+        applicationId: "com.example.flutter_boilerplate.stg"
+      ios:
+        bundleId: "com.example.flutterBoilerplate.stg"
+        customScheme: "flutterboilerplatestg"  # 追加
+        customEntitlements: "Runner/Runner.entitlements"  # 追加
+        
+    production:
+      app:
+        name: "MyApp"
+      android:
+        applicationId: "com.example.flutter_boilerplate"
+      ios:
+        bundleId: "com.example.flutterBoilerplate"
+        customScheme: "flutterboilerplate"  # 追加
+        customEntitlements: "Runner/Runner.entitlements"  #
+
+  instructions:
+    - assets:download
+    - assets:copy
+    - assets:extract
+    - android:buildGradle
+    - ios:xcconfig
+    - ios:buildTargets
+    - ios:schema
+    - ios:plist
+    # flutter関連の生成を無効化
+    # - flutter:flavors
+    # - flutter:app
+    # - flutter:main
