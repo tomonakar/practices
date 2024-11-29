@@ -123,53 +123,56 @@ flutter_native_splash:
 
 # Flutter flavorizr configuration
 flavorizr:
+  ide: "vscode"
   app:
     android:
-      flavorDimensions: "environment"
-    ios:
-      xcodeproj: Runner.xcodeproj
-      
+      flavorDimensions: "flavor-type"
+    
   flavors:
-    development:
+    dev:
       app:
-        name: "MyApp Dev"
+        name: "Flutter Boilerplate Dev"
       android:
-        applicationId: "com.example.flutter_boilerplate.dev"
+        applicationId: "com.tomonakar.flatter_boilerplate.dev"
+        icon: "assets/dev/app-icon.png"
+        adaptiveIcon:
+          foreground: "assets/dev/app-icon-foreground.png"
+          background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.example.flutterBoilerplate.dev"
-        customScheme: "flutterboilerplatedev"  # 追加
-        customEntitlements: "Runner/Runner.entitlements"  #
-        
-    staging:
+        bundleId: "com.tomonakar.flutterBoilerplate.dev"
+        icon: "assets/dev/app-icon.png"
+      macos:
+        bundleId: "com.tomonakar.flutterBoilerplate.dev"
+        icon: "assets/dev/app-icon.png"
+ 
+    stg:
       app:
-        name: "MyApp Stg"
+        name: "Flutter Boilerplate Stg"
       android:
-        applicationId: "com.example.flutter_boilerplate.stg"
+        applicationId: "com.tomonakar.flutter_boilerplate.stg"  
+        icon: "assets/stg/app-icon.png"
+        adaptiveIcon:
+          foreground: "assets/stg/app-icon-foreground.png"
+          background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.example.flutterBoilerplate.stg"
-        customScheme: "flutterboilerplatestg"  # 追加
-        customEntitlements: "Runner/Runner.entitlements"  # 追加
-        
-    production:
+        bundleId: "com.tomonakar.flutterBoilerplate.stg"
+        icon: "assets/stg/app-icon.png"
+      macos:
+        bundleId: "com.tomonakar.flutterBoilerplate.stg"
+        icon: "assets/stg/app-icon.png"
+ 
+    prod:
       app:
-        name: "MyApp"
+        name: "Flutter Boilerplate"
       android:
-        applicationId: "com.example.flutter_boilerplate"
+        applicationId: "com.tomonakar.flutter_boilerplate"
+        icon: "assets/prod/app-icon.png"
+        adaptiveIcon:
+          foreground: "assets/prod/app-icon-foreground.png"
+          background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.example.flutterBoilerplate"
-        customScheme: "flutterboilerplate"  # 追加
-        customEntitlements: "Runner/Runner.entitlements"  #
-
-  instructions:
-    - assets:download
-    - assets:copy
-    - assets:extract
-    - android:buildGradle
-    - ios:xcconfig
-    - ios:buildTargets
-    - ios:schema
-    - ios:plist
-    # flutter関連の生成を無効化
-    - flutter:flavors
-    - flutter:app
-    - flutter:main
+        bundleId: "com.tomonakar.flutterBoilerplate"
+        icon: "assets/prod/app-icon.png"
+      macos:
+        bundleId: "com.tomonakar.flutterBoilerplate"
+        icon: "assets/prod/app-icon.png"

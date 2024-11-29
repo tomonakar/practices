@@ -403,3 +403,11 @@ platform :ios, '13.0'  # 13.0に変更
 
 - Xcodeで開く場合
   - `Runner`プロジェクトを選択 > `Runner`ターゲットを選択 > `Build Setting`タブを選択 > `iOS Deployment Target`を`13.0`に更新
+
+### Flavor Tips
+- 本番環境の`applicationI`及び`bundleId`には`suffix`はつけない（後から変更できなくなる）
+  - `applicationId`: `android/app/build.gradle`の`defaultConfig`配下にある
+  - `bundleId`: `open ios/Runner.xcworkspace/` > open `ios` folder > go to `Runner > General > Identity > Bundle Identifier`
+- flutter_flavorizrは非常に多くの変更を発生させるので、こまめにcommitする
+- `dart run flutter_flavorizr`でFlavorを設定すると、main.dartなどの初期化プロセスが全て上書きされる
+  - `-p`オプションを追加して、必要なカスタムプロセッサーを追加する

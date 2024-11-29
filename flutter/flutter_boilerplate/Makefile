@@ -41,6 +41,26 @@ coverage: ## Run tests with coverage
 flavor: ## Set flavor environment
 	dart run flutter_flavorizr
 
+.PHONY: flavor-android
+flavor-android: ## Set flavor environment for Android
+	dart run flutter_flavorizr -p android:buildGradle,android:androidManifest
+
+.PHONY: flavor-android-icon
+flavor-android-icon: ## Set flavor environment for Android icon
+	dart run flutter_flavorizr -p android:icons
+
+.PHONY: flavor-iOS
+flavor-iOS: ## Set flavor environment for iOS
+	dart run flutter_flavorizr -p assets:download,assets:extract,ios:podfile,ios:xcconfig,ios:buildTargets,ios:schema,ios:plist,ios:dummyAssets,assets:clean
+
+.PHONY: flavor-iOS-icon
+flavor-iOS-icon: ## Set flavor environment for iOS icon
+	dart run flutter_flavorizr -p ios:icons
+
+.PHONY: flavor-macOS
+flavor-macOS: ## Set flavor environment and icons for macOS
+	dart run flutter_flavorizr -p assets:download,assets:extract,macos:podfile,macos:xcconfig,macos:buildTargets,macos:schema,macos:plist,macos:dummyAssets,macos:icons,assets:clean
+
 .PHONY: build-dev
 build-dev: ## Build development
 	flutter build apk --flavor development -t lib/main_development.dart

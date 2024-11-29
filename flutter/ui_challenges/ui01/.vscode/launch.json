@@ -1,0 +1,37 @@
+{
+	// IntelliSense を使用して利用可能な属性を学べます。
+	// 既存の属性の説明をホバーして表示します。
+	// 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Dart",
+			"type": "dart",
+			"request": "launch",
+			"program": "bin/main.dart"
+		},
+		{
+			"name": "Flutter",
+			"type": "dart",
+			"request": "launch",
+			"program": "lib/main.dart"
+		},
+		{
+			"name": "ui01",
+			"request": "launch",
+			"type": "dart"
+		},
+		{
+			"name": "ui01 (profile mode)",
+			"request": "launch",
+			"type": "dart",
+			"flutterMode": "profile"
+		},
+		{
+			"name": "ui01 (release mode)",
+			"request": "launch",
+			"type": "dart",
+			"flutterMode": "release"
+		}
+	]
+}
