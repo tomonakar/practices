@@ -127,14 +127,14 @@ func main() {
 
 	products := []Product{apple, tree, house}
 
+	// BEFORE
 	fmt.Print("Green products (old):\n")
 	f := Filter{}
 	for _, v := range f.filterByColor(products, green) {
 		fmt.Printf(" - %s is green\n", v.name)
 	}
-	// ^ BEFORE
 
-	// v AFTER
+	// AFTER
 	fmt.Print("Green products (new):\n")
 	greenSpec := ColorSpecification{green}
 	bf := BetterFilter{}

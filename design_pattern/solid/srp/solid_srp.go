@@ -36,6 +36,7 @@ func (j *Journal) RemoveEntry(index int) {
 // SRP違反
 // - Journal構造体が２つの責務を持っている
 // - メモリ上の日記エントリの管理(本来の責務)
+// - 永続化(ファイルへの保存)の責務
 func (j *Journal) Save(filename string) {
 	_ = os.WriteFile(filename, []byte(j.String()), 0644)
 }
