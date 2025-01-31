@@ -1,72 +1,123 @@
-enum Color { red, green, blue }
+enum Color {
+  red('Red'),
+  green('Green'),
+  blue('Blue');
 
-enum Size { small, medium, large }
+  final String label;
+  const Color(this.label);
+}
+
+enum Size {
+  small('Small'),
+  medium('Medium'),
+  large('Large');
+
+  final String label;
+  const Size(this.label);
+}
 
 class Product {
   final String name;
   final Color color;
   final Size size;
 
-  const Product(this.name, this.color, this.size);
+  const Product({
+    required this.name,
+    required this.color,
+    required this.size,
+  });
+
+  @override
+  String toString() => '$name (${color.label}, ${size.label})';
 }
 
-abstract class Specification {
-  bool isSatisfied(Product product);
+abstract interface class Specification<T> {
+  bool isSatisfied(T item);
 }
 
-class ColorSpecification implements Specification {
+class ColorSpecification extends Specification<Product> {
   final Color color;
-
-  const ColorSpecification(this.color);
+  ColorSpecification(this.color);
 
   @override
   bool isSatisfied(Product product) => product.color == color;
 }
 
-class SizeSpecification implements Specification {
+class SizeSpecification extends Specification<Product> {
   final Size size;
-
-  const SizeSpecification(this.size);
+  SizeSpecification(this.size);
 
   @override
   bool isSatisfied(Product product) => product.size == size;
 }
 
-class AndSpecification implements Specification {
-  final Specification first;
-  final Specification second;
+// 合成仕様をより柔軟に
+class CompositeSpecification extends Specification<Product> {
+  final List<Specification<Product>> specifications;
+  final bool Function(List<bool>) combiner;
 
-  const AndSpecification(this.first, this.second);
+  CompositeSpecification({
+    required this.specifications,
+    required this.combiner,
+  });
 
   @override
-  bool isSatisfied(Product product) =>
-      first.isSatisfied(product) && second.isSatisfied(product);
+  bool isSatisfied(Product product) {
+    return combiner(
+      specifications.map((spec) => spec.isSatisfied(product)).toList(),
+    );
+  }
+
+  static bool and(List<bool> results) => results.every((result) => result);
+  static bool or(List<bool> results) => results.any((result) => result);
 }
 
-class BetterFilter {
-  List<Product> filter(List<Product> products, Specification spec) {
-    return products.where((p) => spec.isSatisfied(p)).toList();
-  }
+// より機能的なフィルター
+class ProductFilter {
+  const ProductFilter();
+
+  Iterable<Product> filter(
+    Iterable<Product> products,
+    Specification<Product> spec,
+  ) =>
+      products.where(spec.isSatisfied);
 }
 
 void main() {
   final products = [
-    Product('Apple', Color.green, Size.small),
-    Product('Tree', Color.green, Size.large),
-    Product('House', Color.blue, Size.large),
+    Product(name: 'Apple', color: Color.green, size: Size.small),
+    Product(name: 'Tree', color: Color.green, size: Size.large),
+    Product(name: 'House', color: Color.blue, size: Size.large),
   ];
 
-  print('Green products (new):');
-  final greenSpec = ColorSpecification(Color.green);
-  final bf = BetterFilter();
-  for (final v in bf.filter(products, greenSpec)) {
-    print(' - ${v.name} is green');
-  }
+  final filter = ProductFilter();
 
-  final largeSpec = SizeSpecification(Size.large);
-  final largeGreenSpec = AndSpecification(largeSpec, greenSpec);
-  print('Large green items:');
-  for (final v in bf.filter(products, largeGreenSpec)) {
-    print(' - ${v.name} is large and green');
-  }
+  // Green productsを検索
+  print('\nGreen products:');
+  filter
+      .filter(products, ColorSpecification(Color.green))
+      .forEach((p) => print('- $p'));
+
+  // large and green productsを検索
+  print('\nLarge green products:');
+  final largeGreenSpec = CompositeSpecification(
+    specifications: [
+      SizeSpecification(Size.large),
+      ColorSpecification(Color.green),
+    ],
+    combiner: CompositeSpecification.and,
+  );
+
+  filter.filter(products, largeGreenSpec).forEach((p) => print('- $p'));
+
+  // large or green productsを検索
+  print('\nLarge or green products:');
+  final largeOrGreenSpec = CompositeSpecification(
+    specifications: [
+      SizeSpecification(Size.large),
+      ColorSpecification(Color.green),
+    ],
+    combiner: CompositeSpecification.or,
+  );
+  filter.filter(products, largeOrGreenSpec).forEach((p) => print('- $p'));
 }
