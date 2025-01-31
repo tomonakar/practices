@@ -1,5 +1,9 @@
 package main
 
+/// OCP (Open/Closed Principle)
+/// 1. ソフトウェアエンティティ（クラス、モジュール、関数など）は拡張に対して開いているべき
+/// 2. 既存のコードを変更することなく、新しい機能を追加できるようにするべき
+
 import "fmt"
 
 type Color int

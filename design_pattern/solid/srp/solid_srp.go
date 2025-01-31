@@ -1,5 +1,9 @@
 package main
 
+/// SRP (Single Responsibility Principle)
+/// 1. クラスは変更する理由が１つだけでなければならない
+/// 2. クラスは１つの責務だけを持つべきである
+
 import (
 	"fmt"
 	"os"

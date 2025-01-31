@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-/// LSP
+/// LSP (Liskov Substitution Principle)
 /// - サブタイプは、そのすーパータイプと置き換え可能でなければならない
 /// - プログラムの正当性を保証するために、サブタイプはそのスーパータイプの仕様を満たす必要がある
 ///
