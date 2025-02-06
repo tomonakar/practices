@@ -1,4 +1,4 @@
-package factories
+package main
 
 import "fmt"
 
